@@ -1,0 +1,37 @@
+export const nav = {
+  works: "#works",
+  about: "#about",
+  resume:
+    "https://docs.google.com/document/d/1y4YCqqqTgh-DHAgL1pFUllm-B4E7xUTv/edit?usp=sharing&ouid=107242544798062820740&rtpof=true&sd=true",
+  contact: "mailto:designbygaius@gmail.com",
+};
+
+export const socials = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/gaius-gana-447247293",
+  },
+  { label: "Instagram", href: "https://www.instagram.com/__gaius_/" },
+  { label: "Behance", href: "https://www.behance.net/gaiusgana" },
+  { label: "Twitter/X", href: "https://x.com/designbygaius" },
+];
+
+export const footer = {
+  email: "designbygaius@gmail.com",
+  tagline: "Open to learning, collaboration, and meaningful product work.",
+  copyright: "© 2026",
+  credit: "Designed and built with intention.",
+};
+
+export const tools = [
+  "Figma",
+  "Framer",
+  "Gemini",
+  "ChatGPT",
+  "Claude",
+  "Airtable",
+  "Make",
+  "Zapier",
+  "n8n",
+  "Supabase",
+];

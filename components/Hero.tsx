@@ -84,10 +84,10 @@ export default function Hero() {
           style={{ y: bottomY, opacity: bottomOpacity }}
           className="max-w-6xl mx-auto mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-[0.4fr_0.6fr] gap-6 md:gap-16"
         >
-          <p className="font-body font-semibold text-text text-lg sm:text-xl leading-tight">
+          <p className="font-body font-semibold text-text text-lg sm:text-l leading-tight">
             UI/UX Product Designer &amp; AI Automation Specialist
           </p>
-          <p className="font-body text-muted text-sm sm:text-base leading-relaxed">
+          <p className="font-body text-sm sm:text-base leading-relaxed">
             I design digital products that are clear, usable, and built for real-world
             constraints. I also build AI automations that remove repetitive work, so
             startups and teams can focus on growth.

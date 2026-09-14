@@ -18,7 +18,10 @@ function renderWithBold(text: string) {
 
 export default function About() {
   return (
-    <section className="relative py-20 sm:py-24 md:py-28 px-4 sm:px-6 bg-about">
+    <section
+      id="about"
+      className="relative py-20 sm:py-24 md:py-28 px-4 sm:px-6 bg-about"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[0.85fr_1.15fr] gap-10 md:gap-16 items-center">
           <Reveal>
