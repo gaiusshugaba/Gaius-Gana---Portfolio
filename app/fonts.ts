@@ -3,7 +3,7 @@ import { Khand } from "next/font/google";
 
 export const khand = Khand({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-khand",
   display: "swap",
 });
