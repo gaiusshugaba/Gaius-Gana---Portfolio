@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
@@ -15,16 +15,14 @@ const filters: { value: Track; label: string }[] = [
 
 export default function Works() {
   const [active, setActive] = useState<Track>("uiux");
+  const reduce = useReducedMotion();
 
   const featured = projects.filter((p) => p.featured);
   const visible = featured.filter((p) => p.track === active);
   const showViewAll = active === "automation";
 
   return (
-    <section
-      id="works"
-      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6"
-    >
+    <section id="works" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 sm:gap-6 mb-8 sm:mb-12">
@@ -32,20 +30,29 @@ export default function Works() {
               Works
             </h2>
 
-            <div className="inline-flex rounded-full border border-border-subtle bg-surface p-1 self-start sm:self-auto">
-              {filters.map((f) => (
-                <button
-                  key={f.value}
-                  onClick={() => setActive(f.value)}
-                  className={`font-body text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
-                    active === f.value
-                      ? "bg-accent text-bg font-semibold"
-                      : "text-muted hover:text-text"
-                  }`}
-                >
-                  {f.label}
-                </button>
-              ))}
+            <div
+              role="group"
+              aria-label="Filter projects by track"
+              className="inline-flex rounded-full border border-border-subtle bg-surface p-1 self-start sm:self-auto"
+            >
+              {filters.map((f) => {
+                const isActive = active === f.value;
+                return (
+                  <button
+                    key={f.value}
+                    type="button"
+                    onClick={() => setActive(f.value)}
+                    aria-pressed={isActive}
+                    className={`font-body text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-colors ${
+                      isActive
+                        ? "bg-text text-bg dark:bg-accent dark:text-on-accent font-semibold"
+                        : "text-muted hover:text-text"
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </Reveal>
@@ -55,15 +62,13 @@ export default function Works() {
             {visible.map((project, i) => (
               <motion.div
                 key={`${active}-${project.slug}`}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
+                initial={reduce ? false : { opacity: 0, y: 60 }}
+                whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                exit={reduce ? undefined : { opacity: 0, y: -12 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.6,
-                  ease: "easeOut",
-                  delay: i * 0.08,
-                }}
+                transition={
+                  reduce ? { duration: 0 } : { duration: 0.6, ease: "easeOut", delay: i * 0.08 }
+                }
               >
                 <ProjectCard project={project} />
               </motion.div>

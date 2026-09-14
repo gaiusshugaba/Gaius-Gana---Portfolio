@@ -7,7 +7,7 @@ function renderWithBold(text: string) {
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
-        <strong key={i} style={{ fontWeight: 500 }} className="text-bg">
+        <strong key={i} style={{ fontWeight: 500 }} className="text-[#19191A]">
           {part.slice(2, -2)}
         </strong>
       );
@@ -43,7 +43,7 @@ export default function About() {
 
           <Reveal delay={0.1}>
             <div>
-              <h2 className="font-display-bold text-bg text-3xl sm:text-4xl md:text-5xl mb-6 sm:mb-8">
+              <h2 className="font-display-bold text-[#19191A] text-3xl sm:text-4xl md:text-5xl mb-6 sm:mb-8">
                 {aboutCopy.heading}
               </h2>
 
@@ -51,7 +51,7 @@ export default function About() {
                 {aboutCopy.paragraphs.map((p, i) => (
                   <p
                     key={i}
-                    className="font-body text-bg text-sm sm:text-base md:text-lg leading-relaxed"
+                    className="font-body text-[#19191A] text-sm sm:text-base md:text-lg leading-relaxed"
                   >
                     {renderWithBold(p)}
                   </p>

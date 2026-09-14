@@ -7,7 +7,6 @@ export default function ProjectCard({ project }: { project: Project }) {
       href={`/work/${project.slug}`}
       className="group block rounded-2xl border border-border-subtle bg-surface p-5 sm:p-6 md:p-8 transition-colors hover:border-accent/40"
     >
-      {/* Header row */}
       <div className="flex items-start justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
         <div className="flex-1 min-w-0">
           <h3 className="font-display-semibold text-text text-xl sm:text-2xl md:text-3xl leading-tight mb-2 sm:mb-3">
@@ -25,7 +24,6 @@ export default function ProjectCard({ project }: { project: Project }) {
         </span>
       </div>
 
-      {/* Tags */}
       <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
         {project.tags.map((tag) => (
           <span
@@ -37,15 +35,14 @@ export default function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      {/* Thumbnail with hover overlay */}
       <div className="relative rounded-xl overflow-hidden bg-bg">
         <img
           src={project.thumbnail}
           alt={`${project.title} thumbnail`}
           className="block w-full h-auto"
         />
-        <div className="absolute inset-0 bg-bg/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-          <span className="font-body font-semibold text-text text-sm sm:text-base md:text-lg border border-text/40 rounded-full px-4 py-2 sm:px-5 sm:py-2.5">
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+          <span className="font-body font-semibold text-white text-sm sm:text-base md:text-lg border border-white/40 rounded-full px-4 py-2 sm:px-5 sm:py-2.5">
             View Case Study →
           </span>
         </div>
