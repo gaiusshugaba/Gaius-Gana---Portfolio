@@ -15,14 +15,10 @@ export interface CaseStudyMeta {
   value: string;
 }
 
-export interface CaseStudyObjective {
-  text: string;
-}
-
 export interface CaseStudyApproachSection {
   title: string;
   description: string;
-  images: string[];
+  images: CaseStudyImage[];
 }
 
 export interface CaseStudyPalette {
@@ -35,8 +31,10 @@ export interface CaseStudyTypography {
   weights: string[];
 }
 
-export interface CaseStudyFinalImage {
+export interface CaseStudyImage {
   src: string;
+  width: number;
+  height: number;
   caption?: string;
 }
 
@@ -46,7 +44,7 @@ export interface CaseStudy {
   track: Track;
   year: string;
   tags: string[];
-  coverImage: string;
+  coverImage: CaseStudyImage;
   liveUrl?: string;
   timeline: string;
   role: string;
@@ -77,7 +75,7 @@ export interface CaseStudy {
   };
   finalUI: {
     heading: string;
-    images: CaseStudyFinalImage[];
+    images: CaseStudyImage[];
   };
   outcome: {
     heading: string;

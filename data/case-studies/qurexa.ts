@@ -6,7 +6,11 @@ export const qurexa: CaseStudy = {
   track: "uiux",
   year: "2025",
   tags: ["UX/UI", "Healthcare", "Logistics"],
-  coverImage: "/case-studies/qurexa/cover.png",
+  coverImage: {
+    src: "/case-studies/qurexa/cover.png",
+    width: 1400,
+    height: 1035,
+  },
   liveUrl: "https://qurexa.co.uk",
   timeline: "July 2025 – November 2025",
   role: "UI/UX Designer",
@@ -49,31 +53,61 @@ export const qurexa: CaseStudy = {
         title: "Clear Access & Onboarding",
         description:
           "Clear entry points reduce friction from the first interaction. Sign up, verification, and personalization are broken into small, focused steps so first-time users are never overwhelmed.",
-        images: ["/case-studies/qurexa/signin.png"],
+        images: [
+          {
+            src: "/case-studies/qurexa/signin.png",
+            width: 1347,
+            height: 723,
+          },
+        ],
       },
       {
         title: "Privacy by Design",
         description:
           "Sensitive patient data is masked by default. Any admin requesting to view PII must provide a reason, ensuring privacy and compliance are built into the workflow rather than added on top.",
-        images: ["/case-studies/qurexa/privacy.png"],
+        images: [
+          {
+            src: "/case-studies/qurexa/privacy.png",
+            width: 1258,
+            height: 786,
+          },
+        ],
       },
       {
         title: "Customer Dashboard",
         description:
           "All services — prescriptions, returns, and grocery orders — brought into one clear dashboard with quick actions, live status cards, and recent order tracking.",
-        images: ["/case-studies/qurexa/dashboard-full.png"],
+        images: [
+          {
+            src: "/case-studies/qurexa/dashboard-full.png",
+            width: 1258,
+            height: 1538,
+          },
+        ],
       },
       {
         title: "Order Tracking",
         description:
           "Simple delivery states keep users informed and reassured at every step, from order placed to delivered, with a visible rider, timeline, and real-time progress.",
-        images: ["/case-studies/qurexa/tracking.png"],
+        images: [
+          {
+            src: "/case-studies/qurexa/tracking.png",
+            width: 1400,
+            height: 1405,
+          },
+        ],
       },
       {
         title: "Partners & Operations",
         description:
           "Purpose-built tools for partners and operations teams keep deliveries moving efficiently, from sign-up and integration to admin dashboards for live operational visibility.",
-        images: ["/case-studies/qurexa/partners.png"],
+        images: [
+          {
+            src: "/case-studies/qurexa/partners.png",
+            width: 1208,
+            height: 2320,
+          },
+        ],
       },
     ],
   },
@@ -104,13 +138,48 @@ export const qurexa: CaseStudy = {
   finalUI: {
     heading: "Final UI",
     images: [
-      { src: "/case-studies/qurexa/landing-full.png", caption: "Landing Page" },
-      { src: "/case-studies/qurexa/onboarding.png", caption: "Onboarding Flow" },
-      { src: "/case-studies/qurexa/signin-flow.png", caption: "Sign In Flow" },
-      { src: "/case-studies/qurexa/reset-flow.png", caption: "Password Reset Flow" },
-      { src: "/case-studies/qurexa/dashboard-tilted.png", caption: "Customer Dashboard" },
-      { src: "/case-studies/qurexa/admin-tilted.png", caption: "Admin Dashboard" },
-      { src: "/case-studies/qurexa/collage.png", caption: "Screen Library" },
+      {
+        src: "/case-studies/qurexa/landing-full.png",
+        width: 1182,
+        height: 5786,
+        caption: "Landing Page",
+      },
+      {
+        src: "/case-studies/qurexa/onboarding.png",
+        width: 1061,
+        height: 1860,
+        caption: "Onboarding Flow",
+      },
+      {
+        src: "/case-studies/qurexa/signin-flow.png",
+        width: 1047,
+        height: 1049,
+        caption: "Sign In Flow",
+      },
+      {
+        src: "/case-studies/qurexa/reset-flow.png",
+        width: 1047,
+        height: 824,
+        caption: "Password Reset Flow",
+      },
+      {
+        src: "/case-studies/qurexa/dashboard-tilted.png",
+        width: 1400,
+        height: 1515,
+        caption: "Customer Dashboard",
+      },
+      {
+        src: "/case-studies/qurexa/admin-tilted.png",
+        width: 1380,
+        height: 1866,
+        caption: "Admin Dashboard",
+      },
+      {
+        src: "/case-studies/qurexa/collage.png",
+        width: 1400,
+        height: 1035,
+        caption: "Screen Library",
+      },
     ],
   },
 

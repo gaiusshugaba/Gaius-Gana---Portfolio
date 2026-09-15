@@ -99,14 +99,15 @@ export default async function CaseStudyPage({
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative rounded-2xl overflow-hidden border border-border-subtle mt-12 aspect-[16/10]">
+            <div className="rounded-2xl overflow-hidden border border-border-subtle mt-12">
               <Image
-                src={cs.coverImage}
+                src={cs.coverImage.src}
                 alt={`${cs.title} cover`}
-                fill
+                width={cs.coverImage.width}
+                height={cs.coverImage.height}
                 priority
                 sizes="(max-width: 768px) 100vw, 1152px"
-                className="object-cover"
+                className="block w-full h-auto"
               />
             </div>
           </Reveal>
@@ -203,17 +204,18 @@ export default async function CaseStudyPage({
                   {s.description}
                 </p>
                 <div className="flex flex-col gap-6">
-                  {s.images.map((src, j) => (
+                  {s.images.map((img, j) => (
                     <div
                       key={j}
-                      className="relative rounded-2xl overflow-hidden border border-border-subtle aspect-[16/10]"
+                      className="rounded-2xl overflow-hidden border border-border-subtle"
                     >
                       <Image
-                        src={src}
+                        src={img.src}
                         alt={`${s.title} ${j + 1}`}
-                        fill
+                        width={img.width}
+                        height={img.height}
                         sizes="(max-width: 768px) 100vw, 1152px"
-                        className="object-cover"
+                        className="block w-full h-auto"
                       />
                     </div>
                   ))}
@@ -270,7 +272,7 @@ export default async function CaseStudyPage({
         </Reveal>
       </Section>
 
-      {/* Final UI — full width, no cropping */}
+      {/* Final UI */}
       <Section>
         <Reveal>
           <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-12">
@@ -282,12 +284,12 @@ export default async function CaseStudyPage({
           {cs.finalUI.images.map((img, i) => (
             <Reveal key={i}>
               <div>
-                <div className="relative rounded-2xl overflow-hidden border border-border-subtle">
+                <div className="rounded-2xl overflow-hidden border border-border-subtle">
                   <Image
                     src={img.src}
                     alt={img.caption || `Screen ${i + 1}`}
-                    width={2400}
-                    height={1600}
+                    width={img.width}
+                    height={img.height}
                     sizes="(max-width: 768px) 100vw, 1152px"
                     className="block w-full h-auto"
                   />
