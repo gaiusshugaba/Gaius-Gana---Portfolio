@@ -9,3 +9,82 @@ export interface Project {
   thumbnail: string;
   featured: boolean;
 }
+
+export interface CaseStudyMeta {
+  label: string;
+  value: string;
+}
+
+export interface CaseStudyObjective {
+  text: string;
+}
+
+export interface CaseStudyApproachSection {
+  title: string;
+  description: string;
+  images: string[];
+}
+
+export interface CaseStudyPalette {
+  name: string;
+  hex: string;
+}
+
+export interface CaseStudyTypography {
+  fontName: string;
+  weights: string[];
+}
+
+export interface CaseStudyFinalImage {
+  src: string;
+  caption?: string;
+}
+
+export interface CaseStudy {
+  slug: string;
+  title: string;
+  track: Track;
+  year: string;
+  tags: string[];
+  coverImage: string;
+  liveUrl?: string;
+  timeline: string;
+  role: string;
+  context: {
+    heading: string;
+    body: string;
+    meta: CaseStudyMeta[];
+  };
+  problem: {
+    heading: string;
+    body: string;
+    objectives: string[];
+  };
+  research: {
+    heading: string;
+    body: string;
+  };
+  approach: {
+    heading: string;
+    intro: string;
+    sections: CaseStudyApproachSection[];
+  };
+  designSystem: {
+    heading: string;
+    paletteNote: string;
+    palette: CaseStudyPalette[];
+    typography: CaseStudyTypography;
+  };
+  finalUI: {
+    heading: string;
+    images: CaseStudyFinalImage[];
+  };
+  outcome: {
+    heading: string;
+    body: string;
+  };
+  reflection: {
+    heading: string;
+    paragraphs: string[];
+  };
+}
