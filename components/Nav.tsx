@@ -28,7 +28,7 @@ export default function Nav() {
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="font-display-bold text-[#FAFAFA] text-sm md:text-base tracking-tight whitespace-nowrap hover:text-accent transition-colors md:mr-20"
+          className="font-display-bold text-[#FAFAFA] text-sm md:text-base tracking-tight whitespace-nowrap hover:text-accent active:text-accent transition-colors md:mr-20"
         >
           Gaius Gana
         </button>
@@ -36,13 +36,13 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-10">
           <button
             onClick={() => handleScroll("#works")}
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
+            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
             Works
           </button>
           <button
             onClick={() => handleScroll("#about")}
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
+            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
             About
           </button>
@@ -50,7 +50,7 @@ export default function Nav() {
             href={nav.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
+            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
             Resume
           </a>
@@ -60,12 +60,12 @@ export default function Nav() {
           <ThemeToggle />
           <a
             href={nav.contact}
-            className="group inline-flex items-center gap-2 font-body font-semibold text-xs md:text-sm bg-accent text-[#0A0A0A] rounded-full px-4 py-1.5 hover:bg-[#FAFAFA] transition-colors duration-300 whitespace-nowrap"
+            className="group inline-flex items-center gap-2 font-body font-semibold text-xs md:text-sm bg-accent text-[#0A0A0A] rounded-full px-4 py-1.5 hover:bg-[#FAFAFA] active:bg-[#FAFAFA] transition-colors duration-300 whitespace-nowrap"
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
-              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0" />
-              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
+              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0 group-active:translate-x-4 group-active:opacity-0" />
+              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100" />
             </span>
           </a>
         </div>
@@ -91,13 +91,13 @@ export default function Nav() {
         >
           <button
             onClick={() => handleScroll("#works")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 active:bg-black/50 transition-colors"
           >
             Works
           </button>
           <button
             onClick={() => handleScroll("#about")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 active:bg-black/50 transition-colors"
           >
             About
           </button>
@@ -105,18 +105,18 @@ export default function Nav() {
             href={nav.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 active:bg-black/50 transition-colors"
           >
             Resume
           </a>
           <a
             href={nav.contact}
-            className="group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] transition-colors duration-300"
+            className="group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] active:bg-[#FAFAFA] transition-colors duration-300"
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
-              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0" />
-              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
+              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0 group-active:translate-x-4 group-active:opacity-0" />
+              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100" />
             </span>
           </a>
         </div>

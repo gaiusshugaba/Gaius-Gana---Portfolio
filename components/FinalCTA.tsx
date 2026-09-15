@@ -28,12 +28,12 @@ export default function FinalCTA() {
 
               <a
                 href={`mailto:${footer.email}`}
-                className="group inline-flex items-center justify-center gap-3 font-body font-semibold text-[#0A0A0A] bg-accent rounded-full px-6 py-3 sm:px-7 sm:py-4 text-base sm:text-lg hover:bg-[#FAFAFA] transition-colors duration-300"
+                className="group inline-flex items-center justify-center gap-3 font-body font-semibold text-[#0A0A0A] bg-accent rounded-full px-6 py-3 sm:px-7 sm:py-4 text-base sm:text-lg hover:bg-[#FAFAFA] active:bg-[#FAFAFA] transition-colors duration-300"
               >
                 <span>{footer.email}</span>
                 <span aria-hidden="true" className="relative w-5 h-5 shrink-0 overflow-hidden">
-                  <ArrowRight className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-out group-hover:translate-x-6 group-hover:opacity-0" />
-                  <Mail className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-out -translate-x-6 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
+                  <ArrowRight className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-out group-hover:translate-x-6 group-hover:opacity-0 group-active:translate-x-6 group-active:opacity-0" />
+                  <Mail className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-out -translate-x-6 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100" />
                 </span>
               </a>
             </div>
@@ -53,7 +53,7 @@ export default function FinalCTA() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Gaius Gana on ${s.label} (opens in a new tab)`}
-                        className="inline-flex items-center gap-2 font-body text-[#A3A3A3] text-sm sm:text-base hover:text-[#FAFAFA] transition-colors"
+                        className="inline-flex items-center gap-2 font-body text-[#A3A3A3] text-sm sm:text-base hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors"
                       >
                         {Icon && <Icon aria-hidden="true" className="w-4 h-4" />}
                         <span>{s.label}</span>

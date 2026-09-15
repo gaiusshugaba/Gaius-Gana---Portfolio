@@ -63,11 +63,16 @@ export default function Works() {
               <motion.div
                 key={`${active}-${project.slug}`}
                 initial={reduce ? false : { opacity: 0, y: 60 }}
-                whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+                animate={reduce ? undefined : { opacity: 1, y: 0 }}
                 exit={reduce ? undefined : { opacity: 0, y: -12 }}
-                viewport={{ once: true, amount: 0.15 }}
                 transition={
-                  reduce ? { duration: 0 } : { duration: 0.6, ease: "easeOut", delay: i * 0.08 }
+                  reduce
+                    ? { duration: 0 }
+                    : {
+                        duration: 0.6,
+                        ease: "easeOut",
+                        delay: i * 0.08,
+                      }
                 }
               >
                 <ProjectCard project={project} />
