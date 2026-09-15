@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -98,11 +99,14 @@ export default async function CaseStudyPage({
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="rounded-2xl overflow-hidden border border-border-subtle mt-12">
-              <img
+            <div className="relative rounded-2xl overflow-hidden border border-border-subtle mt-12 aspect-[16/10]">
+              <Image
                 src={cs.coverImage}
                 alt={`${cs.title} cover`}
-                className="block w-full h-auto"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 1152px"
+                className="object-cover"
               />
             </div>
           </Reveal>
@@ -202,12 +206,14 @@ export default async function CaseStudyPage({
                   {s.images.map((src, j) => (
                     <div
                       key={j}
-                      className="rounded-2xl overflow-hidden border border-border-subtle"
+                      className="relative rounded-2xl overflow-hidden border border-border-subtle aspect-[16/10]"
                     >
-                      <img
+                      <Image
                         src={src}
                         alt={`${s.title} ${j + 1}`}
-                        className="block w-full h-auto"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 1152px"
+                        className="object-cover"
                       />
                     </div>
                   ))}
@@ -264,7 +270,7 @@ export default async function CaseStudyPage({
         </Reveal>
       </Section>
 
-      {/* Final UI */}
+      {/* Final UI — full width, no cropping */}
       <Section>
         <Reveal>
           <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-12">
@@ -276,10 +282,13 @@ export default async function CaseStudyPage({
           {cs.finalUI.images.map((img, i) => (
             <Reveal key={i}>
               <div>
-                <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                  <img
+                <div className="relative rounded-2xl overflow-hidden border border-border-subtle">
+                  <Image
                     src={img.src}
                     alt={img.caption || `Screen ${i + 1}`}
+                    width={2400}
+                    height={1600}
+                    sizes="(max-width: 768px) 100vw, 1152px"
                     className="block w-full h-auto"
                   />
                 </div>

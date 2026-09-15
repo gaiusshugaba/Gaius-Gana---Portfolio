@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/types";
 
@@ -35,11 +36,13 @@ export default function ProjectCard({ project }: { project: Project }) {
         ))}
       </div>
 
-      <div className="relative rounded-xl overflow-hidden bg-bg">
-        <img
+      <div className="relative rounded-xl overflow-hidden bg-bg aspect-[16/10]">
+        <Image
           src={project.thumbnail}
           alt={`${project.title} thumbnail`}
-          className="block w-full h-auto"
+          fill
+          sizes="(max-width: 768px) 100vw, 1100px"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
           <span className="font-body font-semibold text-white text-sm sm:text-base md:text-lg border border-white/40 rounded-full px-4 py-2 sm:px-5 sm:py-2.5">
