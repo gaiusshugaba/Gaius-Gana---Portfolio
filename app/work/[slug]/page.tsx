@@ -5,9 +5,43 @@ import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { caseStudies, getCaseStudy } from "@/data/case-studies";
+import type { CaseStudyImage } from "@/lib/types";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
+}
+
+function ImageOrVideo({
+  img,
+  alt,
+  loading = "lazy",
+}: {
+  img: CaseStudyImage;
+  alt: string;
+  loading?: "lazy" | "eager";
+}) {
+  if (img.video) {
+    return (
+      <video
+        src={img.src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        className="block w-full h-auto"
+      />
+    );
+  }
+  return (
+    <img
+      src={img.src}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      className="block w-full h-auto"
+    />
+  );
 }
 
 export default async function CaseStudyPage({
@@ -97,16 +131,17 @@ export default async function CaseStudyPage({
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="rounded-2xl overflow-hidden border border-border-subtle mt-12">
-              <img
-                src={cs.coverImage.src}
-                alt={`${cs.title} cover`}
-                decoding="async"
-                className="block w-full h-auto"
-              />
-            </div>
-          </Reveal>
+          {cs.overview && (
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl overflow-hidden border border-border-subtle mt-12">
+                <ImageOrVideo
+                  img={cs.overview}
+                  alt={`${cs.title} overview`}
+                  loading="eager"
+                />
+              </div>
+            </Reveal>
+          )}
         </div>
       </section>
 
@@ -164,6 +199,28 @@ export default async function CaseStudyPage({
             </ul>
           </div>
         </Reveal>
+
+        {cs.problem.images && cs.problem.images.length > 0 && (
+          <Reveal>
+            <div className="flex flex-col gap-6 mt-12">
+              {cs.problem.images.map((img, i) => (
+                <div key={i}>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Problem ${i + 1}`}
+                    />
+                  </div>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </Section>
 
       {/* Research */}
@@ -176,7 +233,65 @@ export default async function CaseStudyPage({
             {cs.research.body}
           </p>
         </Reveal>
+
+        {cs.research.images && cs.research.images.length > 0 && (
+          <Reveal>
+            <div className="flex flex-col gap-6 mt-12">
+              {cs.research.images.map((img, i) => (
+                <div key={i}>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Research ${i + 1}`}
+                    />
+                  </div>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </Section>
+
+      {/* Constraints (optional) */}
+      {cs.constraints && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.constraints.heading}
+            </h2>
+            {cs.constraints.intro && (
+              <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+                {cs.constraints.intro}
+              </p>
+            )}
+          </Reveal>
+
+          <Reveal>
+            <div className="flex flex-col gap-6">
+              {cs.constraints.images.map((img, i) => (
+                <div key={i}>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Constraints ${i + 1}`}
+                    />
+                  </div>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+      )}
 
       {/* Approach */}
       <Section>
@@ -205,13 +320,7 @@ export default async function CaseStudyPage({
                       key={j}
                       className="rounded-2xl overflow-hidden border border-border-subtle"
                     >
-                      <img
-                        src={img.src}
-                        alt={`${s.title} ${j + 1}`}
-                        loading="lazy"
-                        decoding="async"
-                        className="block w-full h-auto"
-                      />
+                      <ImageOrVideo img={img} alt={`${s.title} ${j + 1}`} />
                     </div>
                   ))}
                 </div>
@@ -231,11 +340,11 @@ export default async function CaseStudyPage({
             {cs.designSystem.paletteNote}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-16">
             {cs.designSystem.palette.map((c) => (
               <div key={c.name}>
                 <div
-                  className="rounded-2xl h-40 mb-4"
+                  className="rounded-2xl h-32 sm:h-40 mb-4 border border-border-subtle"
                   style={{ backgroundColor: c.hex }}
                 />
                 <div className="font-body text-text text-base font-semibold">
@@ -265,27 +374,82 @@ export default async function CaseStudyPage({
             </div>
           </div>
         </Reveal>
+
+        {cs.designSystem.images && cs.designSystem.images.length > 0 && (
+          <Reveal>
+            <div className="flex flex-col gap-12 mt-16">
+              {cs.designSystem.images.map((img, i) => (
+                <div key={i}>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Design System ${i + 1}`}
+                    />
+                  </div>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
       </Section>
 
-      {/* Final UI */}
+      {/* Wireframes (optional) */}
+      {cs.wireframes && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-12">
+              {cs.wireframes.heading}
+            </h2>
+          </Reveal>
+
+          <Reveal>
+            <div className="flex flex-col gap-6">
+              {cs.wireframes.images.map((img, i) => (
+                <div key={i}>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Wireframes ${i + 1}`}
+                    />
+                  </div>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+      )}
+
+      {/* Prototype */}
       <Section>
         <Reveal>
-          <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-12">
-            {cs.finalUI.heading}
+          <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+            {cs.prototype.heading}
           </h2>
+          {cs.prototype.intro && (
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+              {cs.prototype.intro}
+            </p>
+          )}
         </Reveal>
 
         <div className="flex flex-col gap-12">
-          {cs.finalUI.images.map((img, i) => (
+          {cs.prototype.images.map((img, i) => (
             <Reveal key={i}>
               <div>
                 <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                  <img
-                    src={img.src}
-                    alt={img.caption || `Screen ${i + 1}`}
-                    loading="lazy"
-                    decoding="async"
-                    className="block w-full h-auto"
+                  <ImageOrVideo
+                    img={img}
+                    alt={img.caption || `Prototype ${i + 1}`}
                   />
                 </div>
                 {img.caption && (

@@ -6,10 +6,10 @@ export const funlearn: CaseStudy = {
   track: "uiux",
   year: "2025",
   tags: ["UX/UI", "Mobile", "EdTech"],
-  coverImage: {
-    src: "/case-studies/funlearn/cover.png",
-    width: 1440,
-    height: 1012,
+  overview: {
+    src: "/case-studies/funlearn/overview.png",
+    width: 816,
+    height: 882,
   },
   timeline: "2025",
   role: "UX/UI Designer",
@@ -33,11 +33,46 @@ export const funlearn: CaseStudy = {
       "Make learning feel like play, not another task.",
       "Work reliably in low-connectivity environments.",
     ],
+    images: [
+      {
+        src: "/case-studies/funlearn/problem-personas.png",
+        width: 1378,
+        height: 310,
+        caption: "Child, Parent, and Connectivity — the three forces shaping the design",
+      },
+    ],
   },
 
   research: {
     heading: "Research & Discovery",
-    body: "I started from two user profiles — the child (Tunde, 10, the Curious Learner) and the parent (Mrs Adebayo, 34, the Engaged Parent) — and mapped their goals, pain points, needs, and motivators. From there I identified five design constraints that shaped every decision: limited connectivity, curriculum alignment with Nigerian primary-school learning, young users navigating independently, two very different audiences (child vs parent) with different information needs, and low cognitive load for parents who shouldn't have to work hard to use the product.",
+    body: "I started from two user profiles — the child (Tunde, 10, the Curious Learner) and the parent (Mrs Adebayo, 34, the Engaged Parent) — and mapped their goals, pain points, needs, and motivators. From there I identified five design constraints that shaped every decision.",
+    images: [
+      {
+        src: "/case-studies/funlearn/context-tunde.png",
+        width: 1380,
+        height: 738,
+        caption: "The Child — Tunde, 10",
+      },
+      {
+        src: "/case-studies/funlearn/context-mrs-adebayo.png",
+        width: 1380,
+        height: 737,
+        caption: "The Parent — Mrs Adebayo, 34",
+      },
+    ],
+  },
+
+  constraints: {
+    heading: "The Constraints",
+    intro:
+      "FunLearn wasn't designed for an ideal environment where every child has fast, reliable internet. Five constraints shaped every decision.",
+    images: [
+      {
+        src: "/case-studies/funlearn/constraints.png",
+        width: 1376,
+        height: 854,
+      },
+    ],
   },
 
   approach: {
@@ -126,73 +161,54 @@ export const funlearn: CaseStudy = {
       "A lightweight design system kept FunLearn playful for children, clear for parents, and consistent across the experience. The colour system balances playfulness with clarity — using colour to communicate action, progress, rewards, and feedback.",
     palette: [
       { name: "Primary Blue", hex: "#1225F1" },
+      { name: "Neutral", hex: "#131519" },
       { name: "Accent Orange", hex: "#FF7748" },
       { name: "Accent Green", hex: "#38BD72" },
       { name: "Accent Pink", hex: "#FF5C84" },
+      { name: "Accent Red", hex: "#E24A4C" },
     ],
     typography: {
       fontName: "Dynapuff & Baloo 2",
       weights: ["Regular", "Medium", "SemiBold", "Bold", "ExtraBold"],
     },
-  },
-
-  finalUI: {
-    heading: "Final UI",
     images: [
-      {
-        src: "/case-studies/funlearn/overview.png",
-        width: 816,
-        height: 882,
-        caption: "Overview",
-      },
-      {
-        src: "/case-studies/funlearn/problem-personas.png",
-        width: 1378,
-        height: 310,
-        caption: "Problem — Child, Parent, Connectivity",
-      },
-      {
-        src: "/case-studies/funlearn/context-tunde.png",
-        width: 1380,
-        height: 738,
-        caption: "Context — The Child (Tunde)",
-      },
-      {
-        src: "/case-studies/funlearn/context-mrs-adebayo.png",
-        width: 1380,
-        height: 737,
-        caption: "Context — The Parent (Mrs Adebayo)",
-      },
-      {
-        src: "/case-studies/funlearn/constraints.png",
-        width: 1376,
-        height: 854,
-        caption: "Constraints",
-      },
-      {
-        src: "/case-studies/funlearn/wireframes.png",
-        width: 1376,
-        height: 1026,
-        caption: "Wireframes",
-      },
       {
         src: "/case-studies/funlearn/design-system-typography.png",
         width: 1379,
         height: 679,
-        caption: "Design System — Typography",
+        caption: "Typography",
       },
       {
         src: "/case-studies/funlearn/design-system-colors.png",
         width: 1280,
         height: 1789,
-        caption: "Design System — Colours",
+        caption: "Colour Palette",
       },
       {
         src: "/case-studies/funlearn/design-system-components.png",
         width: 1381,
         height: 3997,
-        caption: "Design System — Components",
+        caption: "Components",
       },
+    ],
+  },
+
+  wireframes: {
+    heading: "Wireframes",
+    images: [
+      {
+        src: "/case-studies/funlearn/wireframes.png",
+        width: 1376,
+        height: 1026,
+      },
+    ],
+  },
+
+  prototype: {
+    heading: "Prototype",
+    intro:
+      "Two connected flows — one for the child, one for the parent. Tap through to see how the experience comes together.",
+    images: [
       {
         src: "/case-studies/funlearn/prototype-child.mp4",
         width: 1280,

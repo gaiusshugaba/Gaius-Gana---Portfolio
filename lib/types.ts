@@ -45,7 +45,7 @@ export interface CaseStudy {
   track: Track;
   year: string;
   tags: string[];
-  coverImage: CaseStudyImage;
+  overview?: CaseStudyImage;
   liveUrl?: string;
   timeline: string;
   role: string;
@@ -58,10 +58,17 @@ export interface CaseStudy {
     heading: string;
     body: string;
     objectives: string[];
+    images?: CaseStudyImage[];
   };
   research: {
     heading: string;
     body: string;
+    images?: CaseStudyImage[];
+  };
+  constraints?: {
+    heading: string;
+    intro?: string;
+    images: CaseStudyImage[];
   };
   approach: {
     heading: string;
@@ -73,9 +80,15 @@ export interface CaseStudy {
     paletteNote: string;
     palette: CaseStudyPalette[];
     typography: CaseStudyTypography;
+    images?: CaseStudyImage[];
   };
-  finalUI: {
+  wireframes?: {
     heading: string;
+    images: CaseStudyImage[];
+  };
+  prototype: {
+    heading: string;
+    intro?: string;
     images: CaseStudyImage[];
   };
   outcome: {
