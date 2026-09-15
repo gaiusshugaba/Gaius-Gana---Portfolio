@@ -472,7 +472,7 @@ export default async function CaseStudyPage({
         </Section>
       )}
 
-      {/* Prototype (FunLearn style) */}
+      {/* Prototype (FunLearn/Trip style) */}
       {cs.prototype && (
         <Section>
           <Reveal>
@@ -505,6 +505,61 @@ export default async function CaseStudyPage({
               </Reveal>
             ))}
           </div>
+        </Section>
+      )}
+
+      {/* Testing (optional) */}
+      {cs.testing && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-8">
+              {cs.testing.heading}
+            </h2>
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+              {cs.testing.body}
+            </p>
+
+            <div className="border-t border-border-subtle pt-8 mb-12">
+              <h3 className="font-display-semibold text-text text-xl sm:text-2xl mb-6">
+                Key Insights
+              </h3>
+              <ul className="flex flex-col gap-4 list-none p-0 m-0">
+                {cs.testing.insights.map((insight, i) => (
+                  <li
+                    key={i}
+                    className="font-body text-text text-base sm:text-lg leading-relaxed pl-8 relative"
+                  >
+                    <span className="absolute left-0 text-text font-display-semibold">
+                      —
+                    </span>
+                    {insight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          {cs.testing.images && cs.testing.images.length > 0 && (
+            <Reveal>
+              <div className="flex flex-col gap-6">
+                {cs.testing.images.map((img, i) => (
+                  <div key={i}>
+                    <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                      <ImageOrVideo
+                        img={img}
+                        alt={img.caption || `Testing ${i + 1}`}
+                      />
+                    </div>
+                    {img.caption && (
+                      <div className="font-body text-muted text-sm text-center mt-4">
+                        {img.caption}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          )}
         </Section>
       )}
 

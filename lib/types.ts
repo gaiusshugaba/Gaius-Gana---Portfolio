@@ -96,6 +96,12 @@ export interface CaseStudy {
     intro?: string;
     images: CaseStudyImage[];
   };
+  testing?: {
+    heading: string;
+    body: string;
+    insights: string[];
+    images?: CaseStudyImage[];
+  };
   outcome: {
     heading: string;
     body: string;
