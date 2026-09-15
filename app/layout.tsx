@@ -16,13 +16,16 @@ export const metadata: Metadata = {
     "I design digital products that are clear, usable, and built for real-world constraints. I also build AI automations that remove repetitive work.",
 };
 
-const themeScript = `
+const bootstrapScript = `
   (function() {
     try {
       var theme = localStorage.getItem('theme');
       if (!theme) theme = 'dark';
       if (theme === 'dark') document.documentElement.classList.add('dark');
-    } catch (e) {}
+      document.documentElement.classList.add('js-ready');
+    } catch (e) {
+      document.documentElement.classList.add('js-ready');
+    }
   })();
 `;
 
@@ -38,7 +41,7 @@ export default function RootLayout({
       className={`${khand.variable} ${array.variable} ${arrayWide.variable} ${arraySemibold.variable} ${arraySemiboldWide.variable} ${arrayBold.variable} ${arrayBoldWide.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
       </head>
       <body>{children}</body>
     </html>

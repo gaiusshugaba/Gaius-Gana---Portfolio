@@ -17,10 +17,7 @@ export default function Reveal({ children, delay = 0, className }: RevealProps) 
     const el = ref.current;
     if (!el) return;
 
-    // Enable animations only after JS has mounted successfully.
-    document.documentElement.classList.add("js-ready");
-
-    // Safety: if already in viewport on mount, reveal immediately.
+    // If already in the viewport on mount, reveal immediately.
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       setVisible(true);
