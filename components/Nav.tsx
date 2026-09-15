@@ -91,13 +91,13 @@ export default function Nav() {
         >
           <button
             onClick={() => handleScroll("#works")}
-            className="font-body text-[#FAFAFA] text-left text-base py-2 px-2 rounded-lg hover:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
           >
             Works
           </button>
           <button
             onClick={() => handleScroll("#about")}
-            className="font-body text-[#FAFAFA] text-left text-base py-2 px-2 rounded-lg hover:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
           >
             About
           </button>
@@ -105,7 +105,7 @@ export default function Nav() {
             href={nav.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-[#FAFAFA] text-base py-2 px-2 rounded-lg hover:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
           >
             Resume
           </a>

@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import Nav from "@/components/Nav";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -100,13 +99,10 @@ export default async function CaseStudyPage({
 
           <Reveal delay={0.1}>
             <div className="rounded-2xl overflow-hidden border border-border-subtle mt-12">
-              <Image
+              <img
                 src={cs.coverImage.src}
                 alt={`${cs.title} cover`}
-                width={cs.coverImage.width}
-                height={cs.coverImage.height}
-                priority
-                sizes="(max-width: 768px) 100vw, 1152px"
+                decoding="async"
                 className="block w-full h-auto"
               />
             </div>
@@ -209,12 +205,11 @@ export default async function CaseStudyPage({
                       key={j}
                       className="rounded-2xl overflow-hidden border border-border-subtle"
                     >
-                      <Image
+                      <img
                         src={img.src}
                         alt={`${s.title} ${j + 1}`}
-                        width={img.width}
-                        height={img.height}
-                        sizes="(max-width: 768px) 100vw, 1152px"
+                        loading="lazy"
+                        decoding="async"
                         className="block w-full h-auto"
                       />
                     </div>
@@ -285,12 +280,11 @@ export default async function CaseStudyPage({
             <Reveal key={i}>
               <div>
                 <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                  <Image
+                  <img
                     src={img.src}
                     alt={img.caption || `Screen ${i + 1}`}
-                    width={img.width}
-                    height={img.height}
-                    sizes="(max-width: 768px) 100vw, 1152px"
+                    loading="lazy"
+                    decoding="async"
                     className="block w-full h-auto"
                   />
                 </div>
