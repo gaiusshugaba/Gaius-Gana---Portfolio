@@ -17,27 +17,45 @@ export default function Reveal({ children, delay = 0, className }: RevealProps) 
     const el = ref.current;
     if (!el) return;
 
-    // If already in the viewport on mount, reveal immediately.
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setVisible(true);
-      return;
-    }
+    let revealed = false;
+    let ticking = false;
+    const REVEAL_BUFFER = 60;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -40px 0px", threshold: 0.01 }
-    );
+    const check = () => {
+      if (revealed || !el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - REVEAL_BUFFER && rect.bottom > 0) {
+        revealed = true;
+        setVisible(true);
+        cleanup();
+      }
+    };
 
-    observer.observe(el);
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        check();
+        ticking = false;
+      });
+    };
+
+    const cleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+
+    // Delay the first check so the hidden state paints first,
+    // then elements in view fade in nicely on load.
+    const initialTimeout = setTimeout(check, 60);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    return () => {
+      clearTimeout(initialTimeout);
+      cleanup();
+    };
   }, []);
 
   return (

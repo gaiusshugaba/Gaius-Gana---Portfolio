@@ -50,8 +50,9 @@ export default function FinalCTA() {
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-center">
-            <div className="inline-flex flex-col items-stretch w-fit">
-              <h2 className="font-display-bold text-[#FAFAFA] text-5xl sm:text-6xl md:text-7xl mb-4 whitespace-nowrap">
+            {/* Left: heading + email button */}
+            <div className="flex flex-col items-center md:items-start w-full md:w-fit md:mx-0">
+              <h2 className="font-display-bold text-[#FAFAFA] text-5xl sm:text-6xl md:text-7xl mb-4 text-center md:text-left whitespace-nowrap">
                 Lets Talk
               </h2>
 
@@ -82,12 +83,13 @@ export default function FinalCTA() {
               </a>
             </div>
 
-            <div className="md:pt-0 text-left md:text-right">
+            {/* Right: tagline + socials */}
+            <div className="text-center md:text-right">
               <p className="font-body text-[#A3A3A3] text-base sm:text-lg leading-relaxed mb-4">
                 {footer.tagline}
               </p>
 
-              <ul className="flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8 md:justify-end list-none p-0 m-0">
+              <ul className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-3 sm:gap-x-8 list-none p-0 m-0">
                 {socials.map((s) => {
                   const Icon = iconMap[s.label];
                   return (
