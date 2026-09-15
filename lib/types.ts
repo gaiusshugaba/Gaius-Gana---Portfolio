@@ -45,6 +45,7 @@ export interface CaseStudy {
   track: Track;
   year: string;
   tags: string[];
+  coverImage?: CaseStudyImage;
   overview?: CaseStudyImage;
   liveUrl?: string;
   timeline: string;
@@ -86,7 +87,11 @@ export interface CaseStudy {
     heading: string;
     images: CaseStudyImage[];
   };
-  prototype: {
+  finalUI?: {
+    heading: string;
+    images: CaseStudyImage[];
+  };
+  prototype?: {
     heading: string;
     intro?: string;
     images: CaseStudyImage[];

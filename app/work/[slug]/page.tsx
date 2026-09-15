@@ -131,9 +131,21 @@ export default async function CaseStudyPage({
             </div>
           </Reveal>
 
-          {cs.overview && (
+          {cs.coverImage && (
             <Reveal delay={0.1}>
               <div className="rounded-2xl overflow-hidden border border-border-subtle mt-12">
+                <ImageOrVideo
+                  img={cs.coverImage}
+                  alt={`${cs.title} cover`}
+                  loading="eager"
+                />
+              </div>
+            </Reveal>
+          )}
+
+          {cs.overview && (
+            <Reveal delay={0.15}>
+              <div className="rounded-2xl overflow-hidden border border-border-subtle mt-6">
                 <ImageOrVideo
                   img={cs.overview}
                   alt={`${cs.title} overview`}
@@ -257,7 +269,7 @@ export default async function CaseStudyPage({
         )}
       </Section>
 
-      {/* Constraints (optional) */}
+      {/* Constraints */}
       {cs.constraints && (
         <Section>
           <Reveal>
@@ -398,7 +410,7 @@ export default async function CaseStudyPage({
         )}
       </Section>
 
-      {/* Wireframes (optional) */}
+      {/* Wireframes */}
       {cs.wireframes && (
         <Section>
           <Reveal>
@@ -429,39 +441,72 @@ export default async function CaseStudyPage({
         </Section>
       )}
 
-      {/* Prototype */}
-      <Section>
-        <Reveal>
-          <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
-            {cs.prototype.heading}
-          </h2>
-          {cs.prototype.intro && (
-            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
-              {cs.prototype.intro}
-            </p>
-          )}
-        </Reveal>
+      {/* Final UI (Qurexa style) */}
+      {cs.finalUI && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-12">
+              {cs.finalUI.heading}
+            </h2>
+          </Reveal>
 
-        <div className="flex flex-col gap-12">
-          {cs.prototype.images.map((img, i) => (
-            <Reveal key={i}>
-              <div>
-                <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                  <ImageOrVideo
-                    img={img}
-                    alt={img.caption || `Prototype ${i + 1}`}
-                  />
-                </div>
-                {img.caption && (
-                  <div className="font-body text-muted text-sm text-center mt-4">
-                    {img.caption}
+          <div className="flex flex-col gap-12">
+            {cs.finalUI.images.map((img, i) => (
+              <Reveal key={i}>
+                <div>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Screen ${i + 1}`}
+                    />
                   </div>
-                )}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {/* Prototype (FunLearn style) */}
+      {cs.prototype && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.prototype.heading}
+            </h2>
+            {cs.prototype.intro && (
+              <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+                {cs.prototype.intro}
+              </p>
+            )}
+          </Reveal>
+
+          <div className="flex flex-col gap-12">
+            {cs.prototype.images.map((img, i) => (
+              <Reveal key={i}>
+                <div>
+                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
+                    <ImageOrVideo
+                      img={img}
+                      alt={img.caption || `Prototype ${i + 1}`}
+                    />
+                  </div>
+                  {img.caption && (
+                    <div className="font-body text-muted text-sm text-center mt-4">
+                      {img.caption}
+                    </div>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+      )}
 
       {/* Outcome */}
       <Section>
