@@ -36,6 +36,7 @@ export interface CaseStudyImage {
   width: number;
   height: number;
   caption?: string;
+  video?: boolean;
 }
 
 export interface CaseStudy {

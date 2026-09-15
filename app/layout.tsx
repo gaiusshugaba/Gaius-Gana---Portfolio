@@ -8,6 +8,7 @@ import {
   arrayBold,
   arrayBoldWide,
 } from "./fonts";
+import ThemeBootstrap from "@/components/ThemeBootstrap";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,19 +16,6 @@ export const metadata: Metadata = {
   description:
     "I design digital products that are clear, usable, and built for real-world constraints. I also build AI automations that remove repetitive work.",
 };
-
-const bootstrapScript = `
-  (function() {
-    try {
-      var theme = localStorage.getItem('theme');
-      if (!theme) theme = 'dark';
-      if (theme === 'dark') document.documentElement.classList.add('dark');
-      document.documentElement.classList.add('js-ready');
-    } catch (e) {
-      document.documentElement.classList.add('js-ready');
-    }
-  })();
-`;
 
 export default function RootLayout({
   children,
@@ -38,12 +26,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${khand.variable} ${array.variable} ${arrayWide.variable} ${arraySemibold.variable} ${arraySemiboldWide.variable} ${arrayBold.variable} ${arrayBoldWide.variable}`}
+      className={`dark ${khand.variable} ${array.variable} ${arrayWide.variable} ${arraySemibold.variable} ${arraySemiboldWide.variable} ${arrayBold.variable} ${arrayBoldWide.variable}`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: bootstrapScript }} />
-      </head>
-      <body>{children}</body>
+      <body>
+        <ThemeBootstrap />
+        {children}
+      </body>
     </html>
   );
 }
