@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
@@ -15,7 +14,6 @@ const filters: { value: Track; label: string }[] = [
 
 export default function Works() {
   const [active, setActive] = useState<Track>("uiux");
-  const reduce = useReducedMotion();
 
   const featured = projects.filter((p) => p.featured);
   const visible = featured.filter((p) => p.track === active);
@@ -58,23 +56,15 @@ export default function Works() {
         </Reveal>
 
         <div className="flex flex-col gap-4 sm:gap-6">
-          <AnimatePresence mode="wait">
-            {visible.map((project, i) => (
-              <motion.div
-                key={`${active}-${project.slug}`}
-                initial={reduce ? false : { opacity: 0, y: 60 }}
-                animate={reduce ? undefined : { opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -12 }}
-                transition={
-                  reduce
-                    ? { duration: 0 }
-                    : { duration: 0.6, ease: "easeOut", delay: i * 0.08 }
-                }
-              >
-                <ProjectCard project={project} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          {visible.map((project, i) => (
+            <div
+              key={`${active}-${project.slug}`}
+              className="card-enter"
+              style={{ animationDelay: `${i * 0.08}s` }}
+            >
+              <ProjectCard project={project} />
+            </div>
+          ))}
         </div>
 
         {showViewAll && (
