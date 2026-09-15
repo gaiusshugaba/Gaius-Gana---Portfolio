@@ -1,12 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Menu, X, ArrowRight, Mail } from "lucide-react";
 import { nav } from "@/data/socials";
 import ThemeToggle from "./ThemeToggle";
 
+function usePressHandlers() {
+  const [pressed, setPressed] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clear = () => {
+    if (timeout.current) clearTimeout(timeout.current);
+  };
+
+  const handlers = {
+    onPointerDown: () => {
+      clear();
+      setPressed(true);
+    },
+    onPointerUp: () => {
+      clear();
+      timeout.current = setTimeout(() => setPressed(false), 500);
+    },
+    onPointerLeave: () => {
+      clear();
+      setPressed(false);
+    },
+    onPointerCancel: () => {
+      clear();
+      setPressed(false);
+    },
+  };
+
+  return { pressed, handlers };
+}
+
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const desktopCTA = usePressHandlers();
+  const mobileCTA = usePressHandlers();
 
   const handleScroll = (target: string) => {
     setOpen(false);
@@ -60,12 +92,27 @@ export default function Nav() {
           <ThemeToggle />
           <a
             href={nav.contact}
-            className="group inline-flex items-center gap-2 font-body font-semibold text-xs md:text-sm bg-accent text-[#0A0A0A] rounded-full px-4 py-1.5 hover:bg-[#FAFAFA] active:bg-[#FAFAFA] transition-colors duration-300 whitespace-nowrap"
+            {...desktopCTA.handlers}
+            className={`group inline-flex items-center gap-2 font-body font-semibold text-xs md:text-sm rounded-full px-4 py-1.5 transition-colors duration-300 whitespace-nowrap ${
+              desktopCTA.pressed ? "bg-[#FAFAFA]" : "bg-accent"
+            } text-[#0A0A0A] hover:bg-[#FAFAFA]`}
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
-              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0 group-active:translate-x-4 group-active:opacity-0" />
-              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100" />
+              <ArrowRight
+                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
+                  desktopCTA.pressed
+                    ? "translate-x-4 opacity-0"
+                    : "group-hover:translate-x-4 group-hover:opacity-0"
+                }`}
+              />
+              <Mail
+                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
+                  desktopCTA.pressed
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                }`}
+              />
             </span>
           </a>
         </div>
@@ -111,12 +158,27 @@ export default function Nav() {
           </a>
           <a
             href={nav.contact}
-            className="group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] active:bg-[#FAFAFA] transition-colors duration-300"
+            {...mobileCTA.handlers}
+            className={`group inline-flex items-center justify-center gap-2 font-body font-semibold rounded-full px-4 py-2.5 mt-2 transition-colors duration-300 ${
+              mobileCTA.pressed ? "bg-[#FAFAFA]" : "bg-accent"
+            } text-[#0A0A0A] hover:bg-[#FAFAFA]`}
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
-              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0 group-active:translate-x-4 group-active:opacity-0" />
-              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100" />
+              <ArrowRight
+                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
+                  mobileCTA.pressed
+                    ? "translate-x-4 opacity-0"
+                    : "group-hover:translate-x-4 group-hover:opacity-0"
+                }`}
+              />
+              <Mail
+                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
+                  mobileCTA.pressed
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                }`}
+              />
             </span>
           </a>
         </div>

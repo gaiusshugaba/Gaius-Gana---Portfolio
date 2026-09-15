@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useRef } from "react";
 import {
   FaLinkedinIn,
   FaInstagram,
@@ -16,6 +19,32 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export default function FinalCTA() {
+  const [pressed, setPressed] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clear = () => {
+    if (timeout.current) clearTimeout(timeout.current);
+  };
+
+  const handlers = {
+    onPointerDown: () => {
+      clear();
+      setPressed(true);
+    },
+    onPointerUp: () => {
+      clear();
+      timeout.current = setTimeout(() => setPressed(false), 500);
+    },
+    onPointerLeave: () => {
+      clear();
+      setPressed(false);
+    },
+    onPointerCancel: () => {
+      clear();
+      setPressed(false);
+    },
+  };
+
   return (
     <section className="relative pt-20 sm:pt-24 md:pt-28 pb-10 px-4 sm:px-6 bg-[#19191A]">
       <div className="max-w-6xl mx-auto">
@@ -28,12 +57,27 @@ export default function FinalCTA() {
 
               <a
                 href={`mailto:${footer.email}`}
-                className="group inline-flex items-center justify-center gap-3 font-body font-semibold text-[#0A0A0A] bg-accent rounded-full px-6 py-3 sm:px-7 sm:py-4 text-base sm:text-lg hover:bg-[#FAFAFA] active:bg-[#FAFAFA] transition-colors duration-300"
+                {...handlers}
+                className={`group inline-flex items-center justify-center gap-3 font-body font-semibold rounded-full px-6 py-3 sm:px-7 sm:py-4 text-base sm:text-lg transition-colors duration-300 ${
+                  pressed ? "bg-[#FAFAFA]" : "bg-accent"
+                } text-[#0A0A0A] hover:bg-[#FAFAFA]`}
               >
                 <span>{footer.email}</span>
                 <span aria-hidden="true" className="relative w-5 h-5 shrink-0 overflow-hidden">
-                  <ArrowRight className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-out group-hover:translate-x-6 group-hover:opacity-0 group-active:translate-x-6 group-active:opacity-0" />
-                  <Mail className="absolute inset-0 w-5 h-5 transition-all duration-300 ease-out -translate-x-6 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-active:translate-x-0 group-active:opacity-100" />
+                  <ArrowRight
+                    className={`absolute inset-0 w-5 h-5 transition-all duration-300 ease-out ${
+                      pressed
+                        ? "translate-x-6 opacity-0"
+                        : "group-hover:translate-x-6 group-hover:opacity-0"
+                    }`}
+                  />
+                  <Mail
+                    className={`absolute inset-0 w-5 h-5 transition-all duration-300 ease-out ${
+                      pressed
+                        ? "translate-x-0 opacity-100"
+                        : "-translate-x-6 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                    }`}
+                  />
                 </span>
               </a>
             </div>
