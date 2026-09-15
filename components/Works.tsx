@@ -57,13 +57,9 @@ export default function Works() {
 
         <div className="flex flex-col gap-4 sm:gap-6">
           {visible.map((project, i) => (
-            <div
-              key={`${active}-${project.slug}`}
-              className="card-enter"
-              style={{ animationDelay: `${i * 0.08}s` }}
-            >
+            <Reveal key={`${active}-${project.slug}`} delay={i * 0.08}>
               <ProjectCard project={project} />
-            </div>
+            </Reveal>
           ))}
         </div>
 
