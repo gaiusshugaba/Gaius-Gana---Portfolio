@@ -68,11 +68,7 @@ export default function Works() {
                 transition={
                   reduce
                     ? { duration: 0 }
-                    : {
-                        duration: 0.6,
-                        ease: "easeOut",
-                        delay: i * 0.08,
-                      }
+                    : { duration: 0.6, ease: "easeOut", delay: i * 0.08 }
                 }
               >
                 <ProjectCard project={project} />
