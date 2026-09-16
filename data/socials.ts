@@ -1,8 +1,7 @@
 export const nav = {
   works: "#works",
   about: "#about",
-  resume:
-    "https://docs.google.com/document/d/1y4YCqqqTgh-DHAgL1pFUllm-B4E7xUTv/edit?usp=sharing&ouid=107242544798062820740&rtpof=true&sd=true",
+  resume: "/Gaius-Gana-CV.pdf",
   contact: "mailto:designbygaius@gmail.com",
 };
 
