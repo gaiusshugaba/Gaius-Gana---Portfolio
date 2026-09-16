@@ -12,7 +12,7 @@ export const aiLeadCrm: CaseStudy = {
     height: 1875,
   },
   timeline: "1 week",
-  role: "Automation Builder (solo — design, build, testing, documentation)",
+  role: "Solo AI automation engineer (design, build, testing, documentation)",
 
   context: {
     heading: "Context",
