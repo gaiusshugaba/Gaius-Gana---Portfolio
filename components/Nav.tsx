@@ -1,44 +1,13 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, Mail } from "lucide-react";
 import { nav } from "@/data/socials";
 import ThemeToggle from "./ThemeToggle";
 
-function usePressHandlers() {
-  const [pressed, setPressed] = useState(false);
-  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const clear = () => {
-    if (timeout.current) clearTimeout(timeout.current);
-  };
-
-  const handlers = {
-    onPointerDown: () => {
-      clear();
-      setPressed(true);
-    },
-    onPointerUp: () => {
-      clear();
-      timeout.current = setTimeout(() => setPressed(false), 500);
-    },
-    onPointerLeave: () => {
-      clear();
-      setPressed(false);
-    },
-    onPointerCancel: () => {
-      clear();
-      setPressed(false);
-    },
-  };
-
-  return { pressed, handlers };
-}
-
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const desktopCTA = usePressHandlers();
-  const mobileCTA = usePressHandlers();
+  const navRef = useRef<HTMLElement>(null);
 
   const handleScroll = (target: string) => {
     setOpen(false);
@@ -51,8 +20,33 @@ export default function Nav() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
   return (
     <nav
+      ref={navRef}
       aria-label="Primary"
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-[calc(100vw-2rem)] md:w-auto"
     >
@@ -60,7 +54,7 @@ export default function Nav() {
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="font-display-bold text-[#FAFAFA] text-sm md:text-base tracking-tight whitespace-nowrap hover:text-accent active:text-accent transition-colors md:mr-20"
+          className="font-display-bold text-[#FAFAFA] text-sm md:text-base tracking-tight whitespace-nowrap hover:text-accent transition-colors md:mr-20"
         >
           Gaius Gana
         </button>
@@ -68,13 +62,13 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-10">
           <button
             onClick={() => handleScroll("#works")}
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors whitespace-nowrap"
+            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
             Works
           </button>
           <button
             onClick={() => handleScroll("#about")}
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors whitespace-nowrap"
+            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
             About
           </button>
@@ -82,7 +76,7 @@ export default function Nav() {
             href={nav.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] active:text-[#FAFAFA] transition-colors whitespace-nowrap"
+            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
             Resume
           </a>
@@ -92,27 +86,12 @@ export default function Nav() {
           <ThemeToggle />
           <a
             href={nav.contact}
-            {...desktopCTA.handlers}
-            className={`group inline-flex items-center gap-2 font-body font-semibold text-xs md:text-sm rounded-full px-4 py-1.5 transition-colors duration-300 whitespace-nowrap ${
-              desktopCTA.pressed ? "bg-[#FAFAFA]" : "bg-accent"
-            } text-[#0A0A0A] hover:bg-[#FAFAFA]`}
+            className="group inline-flex items-center gap-2 font-body font-semibold text-xs md:text-sm bg-accent text-[#0A0A0A] rounded-full px-4 py-1.5 hover:bg-[#FAFAFA] transition-colors duration-300 whitespace-nowrap"
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
-              <ArrowRight
-                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
-                  desktopCTA.pressed
-                    ? "translate-x-4 opacity-0"
-                    : "group-hover:translate-x-4 group-hover:opacity-0"
-                }`}
-              />
-              <Mail
-                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
-                  desktopCTA.pressed
-                    ? "translate-x-0 opacity-100"
-                    : "-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
-                }`}
-              />
+              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0" />
+              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
             </span>
           </a>
         </div>
@@ -138,13 +117,13 @@ export default function Nav() {
         >
           <button
             onClick={() => handleScroll("#works")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 active:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
           >
             Works
           </button>
           <button
             onClick={() => handleScroll("#about")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 active:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
           >
             About
           </button>
@@ -152,33 +131,18 @@ export default function Nav() {
             href={nav.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 active:bg-black/50 transition-colors"
+            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
           >
             Resume
           </a>
           <a
             href={nav.contact}
-            {...mobileCTA.handlers}
-            className={`group inline-flex items-center justify-center gap-2 font-body font-semibold rounded-full px-4 py-2.5 mt-2 transition-colors duration-300 ${
-              mobileCTA.pressed ? "bg-[#FAFAFA]" : "bg-accent"
-            } text-[#0A0A0A] hover:bg-[#FAFAFA]`}
+            className="group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] transition-colors duration-300"
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
-              <ArrowRight
-                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
-                  mobileCTA.pressed
-                    ? "translate-x-4 opacity-0"
-                    : "group-hover:translate-x-4 group-hover:opacity-0"
-                }`}
-              />
-              <Mail
-                className={`absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out ${
-                  mobileCTA.pressed
-                    ? "translate-x-0 opacity-100"
-                    : "-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
-                }`}
-              />
+              <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0" />
+              <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
             </span>
           </a>
         </div>
