@@ -44,6 +44,17 @@ export default function Nav() {
     };
   }, [open]);
 
+  const menuItems = [
+    { label: "Works", onClick: () => handleScroll("#works"), isLink: false },
+    { label: "About", onClick: () => handleScroll("#about"), isLink: false },
+    {
+      label: "Resume",
+      onClick: () => {},
+      isLink: true,
+      href: nav.resume,
+    },
+  ];
+
   return (
     <nav
       ref={navRef}
@@ -103,41 +114,80 @@ export default function Nav() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="text-[#FAFAFA] p-1"
+            className="text-[#FAFAFA] p-1 relative w-7 h-7 flex items-center justify-center"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            <Menu
+              size={20}
+              className={`absolute transition-all duration-300 ease-out ${
+                open
+                  ? "opacity-0 rotate-90 scale-75"
+                  : "opacity-100 rotate-0 scale-100"
+              }`}
+            />
+            <X
+              size={20}
+              className={`absolute transition-all duration-300 ease-out ${
+                open
+                  ? "opacity-100 rotate-0 scale-100"
+                  : "opacity-0 -rotate-90 scale-75"
+              }`}
+            />
           </button>
         </div>
       </div>
 
-      {open && (
-        <div
-          id="mobile-menu"
-          className="md:hidden mt-2 rounded-2xl border border-[#2E2E30] bg-[#212123]/95 backdrop-blur-xl p-4 flex flex-col gap-1"
-        >
-          <button
-            onClick={() => handleScroll("#works")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
-          >
-            Works
-          </button>
-          <button
-            onClick={() => handleScroll("#about")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
-          >
-            About
-          </button>
-          <a
-            href={nav.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-colors"
-          >
-            Resume
-          </a>
+      <div
+        id="mobile-menu"
+        className={`md:hidden mt-2 rounded-2xl border bg-[#212123]/95 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-out origin-top ${
+          open
+            ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto border-[#2E2E30]"
+            : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none border-transparent"
+        }`}
+      >
+        <div className="p-4 flex flex-col gap-1">
+          {menuItems.map((item, i) => {
+            const delay = open ? `${i * 60 + 80}ms` : "0ms";
+            const commonClasses =
+              "font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out";
+            const animClasses = open
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-2";
+
+            if (item.isLink) {
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${commonClasses} ${animClasses}`}
+                  style={{ transitionDelay: delay }}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+
+            return (
+              <button
+                key={item.label}
+                onClick={item.onClick}
+                className={`${commonClasses} ${animClasses}`}
+                style={{ transitionDelay: delay }}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+
           <a
             href={nav.contact}
-            className="group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] transition-colors duration-300"
+            className={`group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] transition-all duration-300 ease-out ${
+              open
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-2"
+            }`}
+            style={{ transitionDelay: open ? `${menuItems.length * 60 + 80}ms` : "0ms" }}
           >
             <span>Let&apos;s talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
@@ -146,7 +196,7 @@ export default function Nav() {
             </span>
           </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
