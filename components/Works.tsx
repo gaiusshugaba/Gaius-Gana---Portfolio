@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { projects } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
 import Reveal from "./Reveal";
@@ -17,7 +16,6 @@ export default function Works() {
 
   const featured = projects.filter((p) => p.featured);
   const visible = featured.filter((p) => p.track === active);
-  const showViewAll = active === "automation";
 
   return (
     <section id="works" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6">
@@ -62,19 +60,6 @@ export default function Works() {
             </Reveal>
           ))}
         </div>
-
-        {showViewAll && (
-          <Reveal delay={0.2}>
-            <div className="flex justify-center mt-10 sm:mt-12">
-              <Link
-                href="/work"
-                className="font-body text-text text-base sm:text-lg hover:text-accent transition-colors inline-flex items-center gap-2"
-              >
-                View All Works →
-              </Link>
-            </div>
-          </Reveal>
-        )}
       </div>
     </section>
   );
