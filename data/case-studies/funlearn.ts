@@ -11,7 +11,7 @@ export const funlearn: CaseStudy = {
     width: 816,
     height: 882,
   },
-  timeline: "2025",
+  timeline: "5 Weeks",
   role: "UX/UI Designer",
 
   context: {
