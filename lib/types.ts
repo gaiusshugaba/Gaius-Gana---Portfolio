@@ -39,6 +39,39 @@ export interface CaseStudyImage {
   video?: boolean;
 }
 
+export interface CaseStudyBefore {
+  heading: string;
+  body: string;
+  steps: string[];
+  timeCost?: string;
+}
+
+export interface CaseStudyArchitecture {
+  heading: string;
+  intro?: string;
+  images: CaseStudyImage[];
+  modules?: { title: string; description: string }[];
+}
+
+export interface CaseStudyDecision {
+  title: string;
+  description: string;
+}
+
+export interface CaseStudyErrorHandling {
+  heading: string;
+  body: string;
+  items?: string[];
+  images?: CaseStudyImage[];
+}
+
+export interface CaseStudyResult {
+  heading: string;
+  body: string;
+  metrics?: { label: string; value: string }[];
+  images?: CaseStudyImage[];
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -71,12 +104,20 @@ export interface CaseStudy {
     intro?: string;
     images: CaseStudyImage[];
   };
+  before?: CaseStudyBefore;
   approach: {
     heading: string;
     intro: string;
     sections: CaseStudyApproachSection[];
   };
-  designSystem: {
+  architecture?: CaseStudyArchitecture;
+  keyDecisions?: {
+    heading: string;
+    items: CaseStudyDecision[];
+  };
+  errorHandling?: CaseStudyErrorHandling;
+  results?: CaseStudyResult;
+  designSystem?: {
     heading: string;
     paletteNote: string;
     palette: CaseStudyPalette[];
@@ -106,7 +147,7 @@ export interface CaseStudy {
     heading: string;
     body: string;
   };
-  reflection: {
+  reflection?: {
     heading: string;
     paragraphs: string[];
   };

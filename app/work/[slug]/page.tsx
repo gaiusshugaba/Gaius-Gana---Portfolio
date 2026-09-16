@@ -44,6 +44,25 @@ function ImageOrVideo({
   );
 }
 
+function ImageGrid({ images }: { images: CaseStudyImage[] }) {
+  return (
+    <div className="flex flex-col gap-6">
+      {images.map((img, i) => (
+        <div key={i}>
+          <div className="rounded-2xl overflow-hidden border border-border-subtle">
+            <ImageOrVideo img={img} alt={img.caption || `Image ${i + 1}`} />
+          </div>
+          {img.caption && (
+            <div className="font-body text-muted text-sm text-center mt-4">
+              {img.caption}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default async function CaseStudyPage({
   params,
 }: {
@@ -214,22 +233,8 @@ export default async function CaseStudyPage({
 
         {cs.problem.images && cs.problem.images.length > 0 && (
           <Reveal>
-            <div className="flex flex-col gap-6 mt-12">
-              {cs.problem.images.map((img, i) => (
-                <div key={i}>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Problem ${i + 1}`}
-                    />
-                  </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className="mt-12">
+              <ImageGrid images={cs.problem.images} />
             </div>
           </Reveal>
         )}
@@ -248,28 +253,14 @@ export default async function CaseStudyPage({
 
         {cs.research.images && cs.research.images.length > 0 && (
           <Reveal>
-            <div className="flex flex-col gap-6 mt-12">
-              {cs.research.images.map((img, i) => (
-                <div key={i}>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Research ${i + 1}`}
-                    />
-                  </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className="mt-12">
+              <ImageGrid images={cs.research.images} />
             </div>
           </Reveal>
         )}
       </Section>
 
-      {/* Constraints */}
+      {/* Constraints (UX optional) */}
       {cs.constraints && (
         <Section>
           <Reveal>
@@ -284,23 +275,46 @@ export default async function CaseStudyPage({
           </Reveal>
 
           <Reveal>
-            <div className="flex flex-col gap-6">
-              {cs.constraints.images.map((img, i) => (
-                <div key={i}>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Constraints ${i + 1}`}
-                    />
-                  </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
-                </div>
+            <ImageGrid images={cs.constraints.images} />
+          </Reveal>
+        </Section>
+      )}
+
+      {/* Before (automation) */}
+      {cs.before && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-8">
+              {cs.before.heading}
+            </h2>
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+              {cs.before.body}
+            </p>
+
+            <ul className="flex flex-col gap-4 list-none p-0 m-0 max-w-3xl">
+              {cs.before.steps.map((step, i) => (
+                <li
+                  key={i}
+                  className="font-body text-muted text-base sm:text-lg leading-relaxed pl-8 relative line-through decoration-muted/60"
+                >
+                  <span className="absolute left-0 text-muted font-display-semibold no-underline">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {step}
+                </li>
               ))}
-            </div>
+            </ul>
+
+            {cs.before.timeCost && (
+              <div className="mt-10 rounded-2xl border border-accent/40 bg-accent/5 p-6 max-w-3xl">
+                <div className="font-body text-muted text-xs uppercase tracking-wider mb-2">
+                  Time cost
+                </div>
+                <div className="font-body text-text text-base sm:text-lg leading-relaxed">
+                  {cs.before.timeCost}
+                </div>
+              </div>
+            )}
           </Reveal>
         </Section>
       )}
@@ -342,75 +356,174 @@ export default async function CaseStudyPage({
         </div>
       </Section>
 
-      {/* Design System */}
-      <Section>
-        <Reveal>
-          <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
-            {cs.designSystem.heading}
-          </h2>
-          <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
-            {cs.designSystem.paletteNote}
-          </p>
+      {/* Architecture (automation) */}
+      {cs.architecture && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.architecture.heading}
+            </h2>
+            {cs.architecture.intro && (
+              <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+                {cs.architecture.intro}
+              </p>
+            )}
+          </Reveal>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-16">
-            {cs.designSystem.palette.map((c) => (
-              <div key={c.name}>
-                <div
-                  className="rounded-2xl h-32 sm:h-40 mb-4 border border-border-subtle"
-                  style={{ backgroundColor: c.hex }}
-                />
-                <div className="font-body text-text text-base font-semibold">
-                  {c.name}
-                </div>
-                <div className="font-body text-muted text-sm">{c.hex}</div>
+          {cs.architecture.images.length > 0 && (
+            <Reveal>
+              <div className="mb-12">
+                <ImageGrid images={cs.architecture.images} />
               </div>
+            </Reveal>
+          )}
+
+          {cs.architecture.modules && cs.architecture.modules.length > 0 && (
+            <div className="flex flex-col">
+              {cs.architecture.modules.map((mod, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <div className="border-t border-border-subtle py-6 grid grid-cols-[3rem_1fr] sm:grid-cols-[5rem_1fr_1.4fr] gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-0 items-baseline">
+                    <span className="font-display-semibold text-muted text-sm sm:text-base">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-body font-semibold text-text text-base sm:text-lg">
+                      {mod.title}
+                    </span>
+                    <span className="font-body text-muted text-sm sm:text-base leading-relaxed col-span-2 sm:col-span-1">
+                      {mod.description}
+                    </span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </Section>
+      )}
+
+      {/* Key Decisions (automation) */}
+      {cs.keyDecisions && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-12">
+              {cs.keyDecisions.heading}
+            </h2>
+          </Reveal>
+
+          <div className="flex flex-col gap-10 max-w-3xl">
+            {cs.keyDecisions.items.map((item, i) => (
+              <Reveal key={i} delay={i * 0.05}>
+                <div>
+                  <div className="font-body text-muted text-xs uppercase tracking-wider mb-3">
+                    Decision {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="font-display-semibold text-text text-xl sm:text-2xl leading-tight mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="font-body text-muted text-base sm:text-lg leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
+        </Section>
+      )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-border-subtle pt-10 items-center">
-            <div>
-              <div className="font-body text-muted text-xs uppercase tracking-wider mb-3">
-                Typography
-              </div>
-              <div className="font-body text-text text-3xl sm:text-4xl md:text-5xl mb-2">
-                {cs.designSystem.typography.fontName}
-              </div>
-              <div className="font-body text-muted text-sm">
-                {cs.designSystem.typography.weights.join(" · ")}
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <div className="font-body text-text leading-none text-[8rem] sm:text-[10rem] md:text-[12rem]">
-                Aa
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {cs.designSystem.images && cs.designSystem.images.length > 0 && (
+      {/* Error Handling (automation) */}
+      {cs.errorHandling && (
+        <Section>
           <Reveal>
-            <div className="flex flex-col gap-12 mt-16">
-              {cs.designSystem.images.map((img, i) => (
-                <div key={i}>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Design System ${i + 1}`}
-                    />
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-8">
+              {cs.errorHandling.heading}
+            </h2>
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+              {cs.errorHandling.body}
+            </p>
+
+            {cs.errorHandling.items && cs.errorHandling.items.length > 0 && (
+              <ul className="flex flex-col gap-4 list-none p-0 m-0 max-w-3xl">
+                {cs.errorHandling.items.map((item, i) => (
+                  <li
+                    key={i}
+                    className="font-body text-text text-base sm:text-lg leading-relaxed pl-8 relative"
+                  >
+                    <span className="absolute left-0 text-text font-display-semibold">
+                      —
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Reveal>
+
+          {cs.errorHandling.images && cs.errorHandling.images.length > 0 && (
+            <Reveal>
+              <div className="mt-12">
+                <ImageGrid images={cs.errorHandling.images} />
+              </div>
+            </Reveal>
+          )}
+        </Section>
+      )}
+
+      {/* Design System (UX optional) */}
+      {cs.designSystem && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.designSystem.heading}
+            </h2>
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+              {cs.designSystem.paletteNote}
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-16">
+              {cs.designSystem.palette.map((c) => (
+                <div key={c.name}>
+                  <div
+                    className="rounded-2xl h-32 sm:h-40 mb-4 border border-border-subtle"
+                    style={{ backgroundColor: c.hex }}
+                  />
+                  <div className="font-body text-text text-base font-semibold">
+                    {c.name}
                   </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
+                  <div className="font-body text-muted text-sm">{c.hex}</div>
                 </div>
               ))}
             </div>
-          </Reveal>
-        )}
-      </Section>
 
-      {/* Wireframes */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-border-subtle pt-10 items-center">
+              <div>
+                <div className="font-body text-muted text-xs uppercase tracking-wider mb-3">
+                  Typography
+                </div>
+                <div className="font-body text-text text-3xl sm:text-4xl md:text-5xl mb-2">
+                  {cs.designSystem.typography.fontName}
+                </div>
+                <div className="font-body text-muted text-sm">
+                  {cs.designSystem.typography.weights.join(" · ")}
+                </div>
+              </div>
+              <div className="flex justify-end">
+                <div className="font-body text-text leading-none text-[8rem] sm:text-[10rem] md:text-[12rem]">
+                  Aa
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {cs.designSystem.images && cs.designSystem.images.length > 0 && (
+            <Reveal>
+              <div className="mt-16">
+                <ImageGrid images={cs.designSystem.images} />
+              </div>
+            </Reveal>
+          )}
+        </Section>
+      )}
+
+      {/* Wireframes (UX optional) */}
       {cs.wireframes && (
         <Section>
           <Reveal>
@@ -418,25 +531,8 @@ export default async function CaseStudyPage({
               {cs.wireframes.heading}
             </h2>
           </Reveal>
-
           <Reveal>
-            <div className="flex flex-col gap-6">
-              {cs.wireframes.images.map((img, i) => (
-                <div key={i}>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Wireframes ${i + 1}`}
-                    />
-                  </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+            <ImageGrid images={cs.wireframes.images} />
           </Reveal>
         </Section>
       )}
@@ -449,26 +545,9 @@ export default async function CaseStudyPage({
               {cs.finalUI.heading}
             </h2>
           </Reveal>
-
-          <div className="flex flex-col gap-12">
-            {cs.finalUI.images.map((img, i) => (
-              <Reveal key={i}>
-                <div>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Screen ${i + 1}`}
-                    />
-                  </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <ImageGrid images={cs.finalUI.images} />
+          </Reveal>
         </Section>
       )}
 
@@ -485,30 +564,13 @@ export default async function CaseStudyPage({
               </p>
             )}
           </Reveal>
-
-          <div className="flex flex-col gap-12">
-            {cs.prototype.images.map((img, i) => (
-              <Reveal key={i}>
-                <div>
-                  <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                    <ImageOrVideo
-                      img={img}
-                      alt={img.caption || `Prototype ${i + 1}`}
-                    />
-                  </div>
-                  {img.caption && (
-                    <div className="font-body text-muted text-sm text-center mt-4">
-                      {img.caption}
-                    </div>
-                  )}
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <ImageGrid images={cs.prototype.images} />
+          </Reveal>
         </Section>
       )}
 
-      {/* Testing (optional) */}
+      {/* Testing (UX optional) */}
       {cs.testing && (
         <Section>
           <Reveal>
@@ -519,7 +581,7 @@ export default async function CaseStudyPage({
               {cs.testing.body}
             </p>
 
-            <div className="border-t border-border-subtle pt-8 mb-12">
+            <div className="border-t border-border-subtle pt-8">
               <h3 className="font-display-semibold text-text text-xl sm:text-2xl mb-6">
                 Key Insights
               </h3>
@@ -541,22 +603,49 @@ export default async function CaseStudyPage({
 
           {cs.testing.images && cs.testing.images.length > 0 && (
             <Reveal>
-              <div className="flex flex-col gap-6">
-                {cs.testing.images.map((img, i) => (
-                  <div key={i}>
-                    <div className="rounded-2xl overflow-hidden border border-border-subtle">
-                      <ImageOrVideo
-                        img={img}
-                        alt={img.caption || `Testing ${i + 1}`}
-                      />
+              <div className="mt-12">
+                <ImageGrid images={cs.testing.images} />
+              </div>
+            </Reveal>
+          )}
+        </Section>
+      )}
+
+      {/* Results (automation) */}
+      {cs.results && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-8">
+              {cs.results.heading}
+            </h2>
+
+            {cs.results.metrics && cs.results.metrics.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-12">
+                {cs.results.metrics.map((m) => (
+                  <div
+                    key={m.label}
+                    className="border-t border-border-subtle pt-4"
+                  >
+                    <div className="font-display-bold text-text text-3xl sm:text-4xl mb-2">
+                      {m.value}
                     </div>
-                    {img.caption && (
-                      <div className="font-body text-muted text-sm text-center mt-4">
-                        {img.caption}
-                      </div>
-                    )}
+                    <div className="font-body text-muted text-xs uppercase tracking-wider">
+                      {m.label}
+                    </div>
                   </div>
                 ))}
+              </div>
+            )}
+
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl">
+              {cs.results.body}
+            </p>
+          </Reveal>
+
+          {cs.results.images && cs.results.images.length > 0 && (
+            <Reveal>
+              <div className="mt-12">
+                <ImageGrid images={cs.results.images} />
               </div>
             </Reveal>
           )}
@@ -585,24 +674,26 @@ export default async function CaseStudyPage({
         </Reveal>
       </Section>
 
-      {/* Reflection */}
-      <Section>
-        <Reveal>
-          <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-8">
-            {cs.reflection.heading}
-          </h2>
-          <div className="flex flex-col gap-6 max-w-3xl">
-            {cs.reflection.paragraphs.map((p, i) => (
-              <p
-                key={i}
-                className="font-body text-muted text-base sm:text-lg leading-relaxed"
-              >
-                {p}
-              </p>
-            ))}
-          </div>
-        </Reveal>
-      </Section>
+      {/* Reflection (optional) */}
+      {cs.reflection && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-8">
+              {cs.reflection.heading}
+            </h2>
+            <div className="flex flex-col gap-6 max-w-3xl">
+              {cs.reflection.paragraphs.map((p, i) => (
+                <p
+                  key={i}
+                  className="font-body text-muted text-base sm:text-lg leading-relaxed"
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+      )}
 
       {/* Back to home */}
       <Section>

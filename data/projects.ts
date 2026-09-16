@@ -1,7 +1,6 @@
 import type { Project } from "@/lib/types";
 
 export const projects: Project[] = [
-  // UI/UX
   {
     slug: "qurexa",
     title: "Qurexa",
@@ -32,14 +31,13 @@ export const projects: Project[] = [
     thumbnail: "/projects/trip.png",
     featured: true,
   },
-  // AI Automation
   {
     slug: "ai-support",
     title: "AI Customer Support Chatbot",
     summary:
       "Designed and built a multi-tenant AI support system — chat interface, RAG-powered answers, and deterministic escalation.",
     track: "automation",
-    tags: ["n8n", "Pinecone", "Supabase"],
+    tags: ["n8n", "Pinecone", "Supabase", "UI/UX"],
     thumbnail: "/projects/ai-support.png",
     featured: true,
   },
@@ -55,7 +53,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ai-lead-crm",
-    title: "AI Lead Qualification & CRM Automation",
+    title: "AI-Powered Real Estate Lead Qualification & CRM Automation",
     summary:
       "Scores and routes inbound leads with AI, syncs to CRM, alerts sales — with every outcome logged.",
     track: "automation",
