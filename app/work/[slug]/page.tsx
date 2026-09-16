@@ -133,14 +133,21 @@ export default async function CaseStudyPage({
                   Live
                 </div>
                 {cs.liveUrl ? (
-                  <a
-                    href={cs.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-body text-text text-sm sm:text-base hover:text-accent transition-colors underline underline-offset-4 decoration-border-subtle hover:decoration-accent"
-                  >
-                    Visit site →
-                  </a>
+                  <>
+                    <a
+                      href={cs.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-text text-sm sm:text-base hover:text-accent transition-colors underline underline-offset-4 decoration-border-subtle hover:decoration-accent"
+                    >
+                      {cs.liveUrlLabel ?? "Visit site"} →
+                    </a>
+                    {cs.liveUrlNote && (
+                      <div className="font-body text-muted text-xs mt-2 leading-relaxed">
+                        {cs.liveUrlNote}
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="font-body text-muted text-sm sm:text-base">
                     —
@@ -356,6 +363,40 @@ export default async function CaseStudyPage({
         </div>
       </Section>
 
+      {/* Design (hybrid — optional) */}
+      {cs.design && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.design.heading}
+            </h2>
+            <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+              {cs.design.intro}
+            </p>
+
+            {cs.design.principles && cs.design.principles.length > 0 && (
+              <ul className="flex flex-col gap-4 list-none p-0 m-0 max-w-3xl mb-16 border-t border-border-subtle pt-8">
+                {cs.design.principles.map((principle, i) => (
+                  <li
+                    key={i}
+                    className="font-body text-text text-base sm:text-lg leading-relaxed pl-8 relative"
+                  >
+                    <span className="absolute left-0 text-text font-display-semibold">
+                      —
+                    </span>
+                    {principle}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Reveal>
+
+          <Reveal>
+            <ImageGrid images={cs.design.images} />
+          </Reveal>
+        </Section>
+      )}
+
       {/* Architecture (automation) */}
       {cs.architecture && (
         <Section>
@@ -551,7 +592,7 @@ export default async function CaseStudyPage({
         </Section>
       )}
 
-      {/* Prototype (FunLearn/Trip style) */}
+      {/* Prototype (FunLearn/Trip/AI Support style) */}
       {cs.prototype && (
         <Section>
           <Reveal>
@@ -662,14 +703,21 @@ export default async function CaseStudyPage({
             {cs.outcome.body}
           </p>
           {cs.liveUrl && (
-            <a
-              href={cs.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-body font-semibold bg-accent text-on-accent rounded-full px-5 py-3 text-sm sm:text-base hover:brightness-110 transition-all"
-            >
-              Visit live site →
-            </a>
+            <div className="flex flex-col gap-3 items-start">
+              <a
+                href={cs.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-body font-semibold bg-accent text-on-accent rounded-full px-5 py-3 text-sm sm:text-base hover:brightness-110 transition-all"
+              >
+                {cs.liveUrlLabel ?? "Visit live site"} →
+              </a>
+              {cs.liveUrlNote && (
+                <div className="font-body text-muted text-sm">
+                  {cs.liveUrlNote}
+                </div>
+              )}
+            </div>
           )}
         </Reveal>
       </Section>

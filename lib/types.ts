@@ -65,6 +65,13 @@ export interface CaseStudyErrorHandling {
   images?: CaseStudyImage[];
 }
 
+export interface CaseStudyDesign {
+  heading: string;
+  intro: string;
+  principles?: string[];
+  images: CaseStudyImage[];
+}
+
 export interface CaseStudyResult {
   heading: string;
   body: string;
@@ -81,6 +88,8 @@ export interface CaseStudy {
   coverImage?: CaseStudyImage;
   overview?: CaseStudyImage;
   liveUrl?: string;
+  liveUrlLabel?: string;
+  liveUrlNote?: string;
   timeline: string;
   role: string;
   context: {
@@ -110,6 +119,7 @@ export interface CaseStudy {
     intro: string;
     sections: CaseStudyApproachSection[];
   };
+  design?: CaseStudyDesign;
   architecture?: CaseStudyArchitecture;
   keyDecisions?: {
     heading: string;
