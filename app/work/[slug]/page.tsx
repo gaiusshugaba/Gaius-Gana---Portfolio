@@ -83,7 +83,7 @@ export default async function CaseStudyPage({
           <Reveal>
             <Link
               href="/"
-              className="font-body text-muted text-sm hover:text-text transition-colors inline-flex items-center gap-2 mb-10"
+              className="font-body text-muted text-sm hover:text-text transition-colors inline-flex items-center gap-2 -ml-3 px-3 py-3 rounded-lg hover:bg-surface active:bg-surface min-h-[44px] mb-6"
             >
               ← Back
             </Link>
@@ -708,7 +708,7 @@ export default async function CaseStudyPage({
                 href={cs.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-body font-semibold bg-accent text-on-accent rounded-full px-5 py-3 text-sm sm:text-base hover:brightness-110 transition-all"
+                className="inline-flex items-center gap-2 font-body font-semibold bg-accent text-on-accent rounded-full px-5 py-3.5 text-sm sm:text-base hover:brightness-110 active:brightness-95 transition-all min-h-[44px]"
               >
                 {cs.liveUrlLabel ?? "Visit live site"} →
               </a>
@@ -749,7 +749,7 @@ export default async function CaseStudyPage({
           <div className="flex justify-center">
             <Link
               href="/"
-              className="font-body text-text text-base sm:text-lg hover:text-accent transition-colors inline-flex items-center gap-2"
+              className="font-body text-text text-base sm:text-lg hover:text-accent active:text-accent transition-colors inline-flex items-center gap-2 px-5 py-3.5 rounded-lg hover:bg-surface active:bg-surface min-h-[44px]"
             >
               ← Back to all work
             </Link>
