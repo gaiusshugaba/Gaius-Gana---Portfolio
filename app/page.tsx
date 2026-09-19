@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Works from "@/components/Works";
 import ToolsMarquee from "@/components/ToolsMarquee";
+import ClientFeedback from "@/components/ClientFeedback";
 import Process from "@/components/Process";
 import About from "@/components/About";
 import FinalCTA from "@/components/FinalCTA";
@@ -20,6 +21,7 @@ export default function Home() {
       <Hero />
       <Works />
       <ToolsMarquee />
+      <ClientFeedback />
       <Process />
       <About />
       <FinalCTA />
