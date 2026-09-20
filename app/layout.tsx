@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import {
   khand,
   array,
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body>
         <ThemeBootstrap />
         {children}
+        <Analytics />
       </body>
     </html>
   );
