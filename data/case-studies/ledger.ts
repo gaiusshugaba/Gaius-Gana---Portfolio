@@ -7,11 +7,11 @@ export const ledger: CaseStudy = {
   year: "2026",
   tags: ["UI/UX", "FinTech", "n8n", "AI Automation"],
   overview: {
-    src: "/case-studies/ledger/review-screen.png",
+    src: "/case-studies/ledger/ledger-card.png",
     width: 5760,
     height: 4288,
   },
-  liveUrl: "https://ledger-ui-zeta.vercel.app/",
+  liveUrl: "https://ledger-ui-zeta.vercel.app",
   liveUrlLabel: "View live demo",
   timeline: "~4 weeks",
   role: "Solo — UI/UX design and automation build",

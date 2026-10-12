@@ -2,6 +2,16 @@ import type { Project } from "@/lib/types";
 
 export const projects: Project[] = [
   {
+    slug: "ledger",
+    title: "Ledger — Invoice Reconciliation",
+    summary:
+      "Reason-first AP tool that replaces confidence scores with specific explanations — designed and built with n8n, GPT-4o, and Supabase.",
+    track: "uiux",
+    tags: ["UI/UX", "FinTech", "n8n", "AI Automation"],
+    thumbnail: "/case-studies/ledger/ledger-card.png",
+    featured: true,
+  },
+  {
     slug: "qurexa",
     title: "Qurexa",
     summary:
@@ -29,16 +39,6 @@ export const projects: Project[] = [
     track: "uiux",
     tags: ["Mobile", "AI Product", "UI/UX"],
     thumbnail: "/projects/trip.png",
-    featured: true,
-  },
-  {
-    slug: "ledger",
-    title: "Ledger — Invoice Reconciliation",
-    summary:
-      "Reason-first AP tool that replaces confidence scores with specific explanations — designed and built with n8n, GPT-4o, and Supabase.",
-    track: "uiux",
-    tags: ["UI/UX", "FinTech", "n8n", "AI Automation"],
-    thumbnail: "/case-studies/ledger/review-screen.png",
     featured: true,
   },
   {
