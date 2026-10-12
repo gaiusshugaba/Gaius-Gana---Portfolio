@@ -267,6 +267,69 @@ export default async function CaseStudyPage({
         )}
       </Section>
 
+      {/* Quotes (optional) */}
+      {cs.quotes && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.quotes.heading}
+            </h2>
+            {cs.quotes.intro && (
+              <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+                {cs.quotes.intro}
+              </p>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {cs.quotes.items.map((quote, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <div className="rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8 h-full flex flex-col">
+                    <p className="font-body text-text text-base sm:text-lg leading-relaxed italic mb-6 flex-1">
+                      "{quote.text}"
+                    </p>
+                    <div className="font-body text-muted text-xs uppercase tracking-wider">
+                      {quote.source}
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+      )}
+
+      {/* Quotes (optional) */}
+      {cs.quotes && (
+        <Section>
+          <Reveal>
+            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
+              {cs.quotes.heading}
+            </h2>
+            {cs.quotes.intro && (
+              <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
+                {cs.quotes.intro}
+              </p>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {cs.quotes.items.map((quote, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <div className="rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8 h-full flex flex-col">
+                    <p className="font-body text-text text-base sm:text-lg leading-relaxed italic mb-6 flex-1">
+                      "{quote.text}"
+                    </p>
+                    <div className="font-body text-muted text-xs uppercase tracking-wider">
+                      {quote.source}
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </Reveal>
+        </Section>
+      )}
+
+
       {/* Constraints (UX optional) */}
       {cs.constraints && (
         <Section>

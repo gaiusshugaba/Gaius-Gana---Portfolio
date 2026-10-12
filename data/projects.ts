@@ -32,10 +32,20 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "ai-support",
-    title: "AI Customer Support Chatbot",
+    slug: "ledger",
+    title: "Ledger — Invoice Reconciliation",
     summary:
-      "Designed and built a multi-tenant AI support system — chat interface, RAG-powered answers, and deterministic escalation.",
+      "Reason-first AP tool that replaces confidence scores with specific explanations — designed and built with n8n, GPT-4o, and Supabase.",
+    track: "uiux",
+    tags: ["UI/UX", "FinTech", "n8n", "AI Automation"],
+    thumbnail: "/case-studies/ledger/review-screen.png",
+    featured: true,
+  },
+  {
+    slug: "ai-support",
+    title: "An AI Support System With Deterministic Escalation",
+    summary:
+      "Multi-tenant RAG platform that answers from tenant docs, escalates deterministically when it shouldn't answer, and manages multi-turn case intake.",
     track: "automation",
     tags: ["n8n", "Pinecone", "Supabase", "UI/UX"],
     thumbnail: "/projects/ai-support.png",
@@ -60,15 +70,5 @@ export const projects: Project[] = [
     tags: ["n8n", "Gemini", "HubSpot"],
     thumbnail: "/projects/ai-lead-crm.png",
     featured: true,
-  },
-  {
-    slug: "media-monitoring",
-    title: "Media Monitoring & Alerts",
-    summary:
-      "Tracks news mentions by keyword, classifies sentiment, alerts on negative coverage, and logs everything.",
-    track: "automation",
-    tags: ["Make", "Serper.dev", "Slack"],
-    thumbnail: "/projects/media-monitoring.png",
-    featured: false,
   },
 ];

@@ -6,16 +6,20 @@ import ProjectCard from "./ProjectCard";
 import Reveal from "./Reveal";
 import type { Track } from "@/lib/types";
 
-const filters: { value: Track; label: string }[] = [
+type Filter = "all" | Track;
+
+const filters: { value: Filter; label: string }[] = [
+  { value: "all", label: "All" },
   { value: "uiux", label: "UI/UX" },
   { value: "automation", label: "AI Automation" },
 ];
 
 export default function Works() {
-  const [active, setActive] = useState<Track>("uiux");
+  const [active, setActive] = useState<Filter>("all");
 
   const featured = projects.filter((p) => p.featured);
-  const visible = featured.filter((p) => p.track === active);
+  const visible =
+    active === "all" ? featured : featured.filter((p) => p.track === active);
 
   return (
     <section id="works" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6">

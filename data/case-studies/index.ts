@@ -1,6 +1,7 @@
 import { qurexa } from "./qurexa";
 import { funlearn } from "./funlearn";
 import { trip } from "./trip";
+import { ledger } from "./ledger";
 import { aiLeadCrm } from "./ai-lead-crm";
 import { aiNewsletter } from "./ai-newsletter";
 import { aiSupport } from "./ai-support";
@@ -10,6 +11,7 @@ export const caseStudies: CaseStudy[] = [
   qurexa,
   funlearn,
   trip,
+  ledger,
   aiLeadCrm,
   aiNewsletter,
   aiSupport,

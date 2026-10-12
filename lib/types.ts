@@ -39,6 +39,11 @@ export interface CaseStudyImage {
   video?: boolean;
 }
 
+export interface CaseStudyQuote {
+  text: string;
+  source: string;
+}
+
 export interface CaseStudyBefore {
   heading: string;
   body: string;
@@ -107,6 +112,11 @@ export interface CaseStudy {
     heading: string;
     body: string;
     images?: CaseStudyImage[];
+  };
+  quotes?: {
+    heading: string;
+    intro?: string;
+    items: CaseStudyQuote[];
   };
   constraints?: {
     heading: string;
