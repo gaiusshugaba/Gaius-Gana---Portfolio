@@ -21,6 +21,17 @@ function ImageOrVideo({
   loading?: "lazy" | "eager";
 }) {
   if (img.video) {
+    if (img.videoAudio) {
+      return (
+        <video
+          src={img.src}
+          controls
+          playsInline
+          preload="metadata"
+          className="block w-full h-auto"
+        />
+      );
+    }
     return (
       <video
         src={img.src}
@@ -83,7 +94,7 @@ export default async function CaseStudyPage({
           <Reveal>
             <Link
               href="/"
-              className="font-body text-muted text-sm hover:text-text transition-colors inline-flex items-center gap-2 -ml-3 px-3 py-3 rounded-lg hover:bg-surface active:bg-surface min-h-[44px] mb-6"
+              className="font-body text-muted text-sm hover:text-text transition-colors inline-flex items-center gap-2 mb-10"
             >
               ← Back
             </Link>
@@ -285,7 +296,7 @@ export default async function CaseStudyPage({
                 <Reveal key={i} delay={i * 0.05}>
                   <div className="rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8 h-full flex flex-col">
                     <p className="font-body text-text text-base sm:text-lg leading-relaxed italic mb-6 flex-1">
-                      "{quote.text}"
+                      &ldquo;{quote.text}&rdquo;
                     </p>
                     <div className="font-body text-muted text-xs uppercase tracking-wider">
                       {quote.source}
@@ -297,38 +308,6 @@ export default async function CaseStudyPage({
           </Reveal>
         </Section>
       )}
-
-      {/* Quotes (optional) */}
-      {cs.quotes && (
-        <Section>
-          <Reveal>
-            <h2 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl mb-6">
-              {cs.quotes.heading}
-            </h2>
-            {cs.quotes.intro && (
-              <p className="font-body text-muted text-base sm:text-lg leading-relaxed max-w-3xl mb-12">
-                {cs.quotes.intro}
-              </p>
-            )}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {cs.quotes.items.map((quote, i) => (
-                <Reveal key={i} delay={i * 0.05}>
-                  <div className="rounded-2xl border border-border-subtle bg-surface p-6 sm:p-8 h-full flex flex-col">
-                    <p className="font-body text-text text-base sm:text-lg leading-relaxed italic mb-6 flex-1">
-                      "{quote.text}"
-                    </p>
-                    <div className="font-body text-muted text-xs uppercase tracking-wider">
-                      {quote.source}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </Reveal>
-        </Section>
-      )}
-
 
       {/* Constraints (UX optional) */}
       {cs.constraints && (
@@ -400,30 +379,32 @@ export default async function CaseStudyPage({
           </p>
         </Reveal>
 
-        <div className="flex flex-col gap-20 mt-20">
-          {cs.approach.sections.map((s, i) => (
-            <Reveal key={i}>
-              <div>
-                <h3 className="font-display-bold text-text text-2xl sm:text-3xl md:text-4xl text-center mb-4">
-                  {s.title}
-                </h3>
-                <p className="font-body text-muted text-sm sm:text-base md:text-lg leading-relaxed text-center max-w-2xl mx-auto mb-8">
-                  {s.description}
-                </p>
-                <div className="flex flex-col gap-6">
-                  {s.images.map((img, j) => (
-                    <div
-                      key={j}
-                      className="rounded-2xl overflow-hidden border border-border-subtle"
-                    >
-                      <ImageOrVideo img={img} alt={`${s.title} ${j + 1}`} />
-                    </div>
-                  ))}
+        {cs.approach.sections.length > 0 && (
+          <div className="flex flex-col gap-20 mt-20">
+            {cs.approach.sections.map((s, i) => (
+              <Reveal key={i}>
+                <div>
+                  <h3 className="font-display-bold text-text text-2xl sm:text-3xl md:text-4xl text-center mb-4">
+                    {s.title}
+                  </h3>
+                  <p className="font-body text-muted text-sm sm:text-base md:text-lg leading-relaxed text-center max-w-2xl mx-auto mb-8">
+                    {s.description}
+                  </p>
+                  <div className="flex flex-col gap-6">
+                    {s.images.map((img, j) => (
+                      <div
+                        key={j}
+                        className="rounded-2xl overflow-hidden border border-border-subtle"
+                      >
+                        <ImageOrVideo img={img} alt={`${s.title} ${j + 1}`} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+              </Reveal>
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* Design (hybrid — optional) */}
@@ -655,7 +636,7 @@ export default async function CaseStudyPage({
         </Section>
       )}
 
-      {/* Prototype (FunLearn/Trip/AI Support style) */}
+      {/* Prototype (FunLearn/Trip/AI Support/Ledger style) */}
       {cs.prototype && (
         <Section>
           <Reveal>
@@ -771,7 +752,7 @@ export default async function CaseStudyPage({
                 href={cs.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-body font-semibold bg-accent text-on-accent rounded-full px-5 py-3.5 text-sm sm:text-base hover:brightness-110 active:brightness-95 transition-all min-h-[44px]"
+                className="inline-flex items-center gap-2 font-body font-semibold bg-accent text-on-accent rounded-full px-5 py-3 text-sm sm:text-base hover:brightness-110 transition-all"
               >
                 {cs.liveUrlLabel ?? "Visit live site"} →
               </a>
@@ -812,7 +793,7 @@ export default async function CaseStudyPage({
           <div className="flex justify-center">
             <Link
               href="/"
-              className="font-body text-text text-base sm:text-lg hover:text-accent active:text-accent transition-colors inline-flex items-center gap-2 px-5 py-3.5 rounded-lg hover:bg-surface active:bg-surface min-h-[44px]"
+              className="font-body text-text text-base sm:text-lg hover:text-accent transition-colors inline-flex items-center gap-2"
             >
               ← Back to all work
             </Link>
