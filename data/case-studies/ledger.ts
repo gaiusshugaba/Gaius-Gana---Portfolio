@@ -126,7 +126,7 @@ export const ledger: CaseStudy = {
     images: [],
   },
 
-    prototype: {
+     prototype: {
     heading: "The Product",
     intro: "The review screen is the product in one shot. PDF on the left, extraction panel, automated checks, and line items on the right.",
     images: [
@@ -134,7 +134,7 @@ export const ledger: CaseStudy = {
         src: "/case-studies/ledger/walkthrough-narrated.mp4",
         width: 1280,
         height: 720,
-        caption: "Full walkthrough — narrated",
+        caption: "Invoice upload flow",
         video: true,
         videoAudio: true,
       },
@@ -142,7 +142,7 @@ export const ledger: CaseStudy = {
         src: "/case-studies/ledger/walkthrough-silent.mp4",
         width: 1280,
         height: 720,
-        caption: "Silent loop — review flow",
+        caption: "Review and exception flow",
         video: true,
       },
       {

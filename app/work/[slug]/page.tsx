@@ -636,7 +636,7 @@ export default async function CaseStudyPage({
         </Section>
       )}
 
-      {/* Prototype (FunLearn/Trip/AI Support/Ledger style) */}
+      {/* Prototype */}
       {cs.prototype && (
         <Section>
           <Reveal>
