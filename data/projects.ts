@@ -1,12 +1,12 @@
 import type { Project } from "@/lib/types";
 
 export const projects: Project[] = [
+  // --- UI/UX PROJECTS ---
   {
     slug: "ledger",
     title: "Ledger — Invoice Reconciliation",
-    summary:
-      "Reason-first AP tool that replaces confidence scores with specific explanations — designed and built with n8n, GPT-4o, and Supabase.",
-    track: "uiux",
+    summary: "Reason-first AP tool that replaces confidence scores with specific explanations — designed and built with n8n, GPT-4o, and Supabase.",
+    track: ["uiux", "automation"], // Appears in both!
     tags: ["UI/UX", "FinTech", "n8n", "AI Automation"],
     thumbnail: "/case-studies/ledger/ledger-card.png",
     featured: true,
@@ -14,9 +14,8 @@ export const projects: Project[] = [
   {
     slug: "qurexa",
     title: "Qurexa",
-    summary:
-      "Role-based dashboards for a UK healthcare logistics startup — one clear operations view per team, from prescription intake to delivery.",
-    track: "uiux",
+    summary: "Role-based dashboards for a UK healthcare logistics startup — one clear operations view per team, from prescription intake to delivery.",
+    track: ["uiux"],
     tags: ["Website & Webapp", "Dashboards", "UI/UX"],
     thumbnail: "/projects/qurexa.png",
     featured: true,
@@ -24,9 +23,8 @@ export const projects: Project[] = [
   {
     slug: "funlearn",
     title: "FunLearn — Connected Learning Experience",
-    summary:
-      "Offline-first, gamified learning for Nigerian primary school pupils — designed for low-connectivity classrooms and shared devices.",
-    track: "uiux",
+    summary: "Offline-first, gamified learning for Nigerian primary school pupils — designed for low-connectivity classrooms and shared devices.",
+    track: ["uiux"],
     tags: ["UI/UX", "Gamified Learning", "Mobile"],
     thumbnail: "/projects/funlearn.png",
     featured: true,
@@ -34,41 +32,60 @@ export const projects: Project[] = [
   {
     slug: "trip",
     title: "Trip — AI Travel Planner",
-    summary:
-      "An AI-assisted travel planner that turns scattered trip decisions — flights, stays, itinerary — into one guided flow.",
-    track: "uiux",
+    summary: "An AI-assisted travel planner that turns scattered trip decisions — flights, stays, itinerary — into one guided flow.",
+    track: ["uiux"],
     tags: ["Mobile", "AI Product", "UI/UX"],
     thumbnail: "/projects/trip.png",
     featured: true,
   },
+
+  // --- AUTOMATION PROJECTS ---
   {
     slug: "ai-support",
     title: "An AI Support System With Deterministic Escalation",
-    summary:
-      "Multi-tenant RAG platform that answers from tenant docs, escalates deterministically when it shouldn't answer, and manages multi-turn case intake.",
-    track: "automation",
+    summary: "Multi-tenant RAG platform that answers from tenant docs, escalates deterministically when it shouldn't answer, and manages multi-turn case intake.",
+    track: ["automation"],
     tags: ["n8n", "Pinecone", "Supabase", "UI/UX"],
     thumbnail: "/projects/ai-support.png",
     featured: true,
   },
   {
-    slug: "ai-newsletter",
-    title: "AI Newsletter Automation",
-    summary:
-      "Researches, ranks, writes, and segments a newsletter — with human approval before send.",
-    track: "automation",
-    tags: ["n8n", "Gemini", "Airtable"],
-    thumbnail: "/projects/ai-newsletter.png",
-    featured: true,
-  },
-  {
     slug: "ai-lead-crm",
     title: "AI-Powered Real Estate Lead Qualification & CRM Automation",
-    summary:
-      "Scores and routes inbound leads with AI, syncs to CRM, alerts sales — with every outcome logged.",
-    track: "automation",
+    summary: "Scores and routes inbound leads with AI, syncs to CRM, alerts sales — with every outcome logged.",
+    track: ["automation"],
     tags: ["n8n", "Gemini", "HubSpot"],
     thumbnail: "/projects/ai-lead-crm.png",
     featured: true,
   },
+  {
+    slug: "ai-newsletter",
+    title: "AI Newsletter Automation",
+    summary: "Researches, ranks, writes, and segments a newsletter — with human approval before send.",
+    track: ["automation"],
+    tags: ["n8n", "Gemini", "Airtable"],
+    thumbnail: "/projects/ai-newsletter.png",
+    featured: true,
+  },
+
+  // --- VIDEO PROJECTS ---
+  {
+    slug: "ai-video-1",
+    title: "AI Commercial / Ad",
+    summary: "A 15-second AI-generated commercial designed to capture attention and showcase a product.",
+    track: ["video"],
+    tags: ["AI Video", "Canva", "Commercial"],
+    thumbnail: "/videos/Ai UGC ad commercial.mp4", 
+    featured: true,
+  },
+  {
+    slug: "qurexa-media",
+    title: "Qurexa — AI Social Content",
+    summary: "High-velocity short-form video built in Canva using AI-generated visuals.",
+    track: ["video"],
+    tags: ["AI Video", "Explainer", "Social"],
+    thumbnail: "/videos/Healthcare explainer.mp4",
+    featured: true,
+  },
+
 ];

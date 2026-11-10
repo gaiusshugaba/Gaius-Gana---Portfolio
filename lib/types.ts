@@ -1,10 +1,10 @@
-export type Track = "uiux" | "automation";
+export type Track = "uiux" | "automation" | "video";
 
 export interface Project {
   slug: string;
   title: string;
   summary: string;
-  track: Track;
+  track: Track[];
   tags: string[];
   thumbnail: string;
   featured: boolean;

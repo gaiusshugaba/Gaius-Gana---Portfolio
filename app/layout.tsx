@@ -10,6 +10,8 @@ import {
   arrayBoldWide,
 } from "./fonts";
 import ThemeBootstrap from "@/components/ThemeBootstrap";
+import CustomCursor from "@/components/CustomCursor";
+import { ContactProvider } from "@/components/ContactProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -30,8 +32,11 @@ export default function RootLayout({
       className={`dark ${khand.variable} ${array.variable} ${arrayWide.variable} ${arraySemibold.variable} ${arraySemiboldWide.variable} ${arrayBold.variable} ${arrayBoldWide.variable}`}
     >
       <body>
+        <CustomCursor />
         <ThemeBootstrap />
-        {children}
+        <ContactProvider>
+          {children}
+        </ContactProvider>
         <Analytics />
       </body>
     </html>

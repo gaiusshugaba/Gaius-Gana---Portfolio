@@ -1,8 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Works from "@/components/Works";
+import Services from "@/components/Services";
 import ToolsMarquee from "@/components/ToolsMarquee";
-import ClientFeedback from "@/components/ClientFeedback";
 import Process from "@/components/Process";
 import About from "@/components/About";
 import FinalCTA from "@/components/FinalCTA";
@@ -15,13 +14,12 @@ export default function Home() {
         href="#works"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-[#0A0A0A] focus:font-body focus:font-semibold focus:rounded-full focus:px-4 focus:py-2"
       >
-        Skip to work
+        Skip to services
       </a>
       <Nav />
       <Hero />
-      <Works />
+      <Services />
       <ToolsMarquee />
-      <ClientFeedback />
       <Process />
       <About />
       <FinalCTA />

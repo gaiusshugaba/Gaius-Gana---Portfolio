@@ -10,6 +10,7 @@ import {
 import { ArrowRight, Mail } from "lucide-react";
 import { socials, footer } from "@/data/socials";
 import Reveal from "./Reveal";
+import { useContact } from "./ContactProvider";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LinkedIn: FaLinkedinIn,
@@ -19,6 +20,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export default function FinalCTA() {
+  const { openModal } = useContact();
   const [pressed, setPressed] = useState(false);
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -50,14 +52,14 @@ export default function FinalCTA() {
       <div className="max-w-6xl mx-auto">
         <Reveal>
           <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-center">
-            {/* Left: heading + email button */}
-            <div className="flex flex-col items-center md:items-start w-full md:w-fit md:mx-0">
-              <h2 className="font-display-bold text-[#FAFAFA] text-5xl sm:text-6xl md:text-7xl mb-4 text-center md:text-left whitespace-nowrap">
+            <div className="inline-flex flex-col items-stretch w-fit">
+              <h2 className="font-display-bold text-[#FAFAFA] text-5xl sm:text-6xl md:text-7xl mb-4 whitespace-nowrap">
                 Lets Talk
               </h2>
 
-              <a
-                href={`mailto:${footer.email}`}
+              {/* Button now triggers the modal */}
+              <button
+                onClick={openModal}
                 {...handlers}
                 className={`group inline-flex items-center justify-center gap-3 font-body font-semibold rounded-full px-6 py-3 sm:px-7 sm:py-4 text-base sm:text-lg transition-colors duration-300 ${
                   pressed ? "bg-[#FAFAFA]" : "bg-accent"
@@ -80,16 +82,15 @@ export default function FinalCTA() {
                     }`}
                   />
                 </span>
-              </a>
+              </button>
             </div>
 
-            {/* Right: tagline + socials */}
-            <div className="text-center md:text-right">
+            <div className="md:pt-0 text-left md:text-right">
               <p className="font-body text-[#A3A3A3] text-base sm:text-lg leading-relaxed mb-4">
                 {footer.tagline}
               </p>
 
-              <ul className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-3 sm:gap-x-8 list-none p-0 m-0">
+              <ul className="flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8 md:justify-end list-none p-0 m-0">
                 {socials.map((s) => {
                   const Icon = iconMap[s.label];
                   return (
