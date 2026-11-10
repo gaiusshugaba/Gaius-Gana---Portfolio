@@ -12,30 +12,16 @@ export default function Nav() {
   const { openModal } = useContact();
 
   const handleScroll = (target: string) => {
-    const isMenuOpen = open;
     setOpen(false);
-
-    const scrollToTarget = () => {
+    
+    // Short delay to allow the mobile menu to start closing before scrolling
+    setTimeout(() => {
       const el = document.querySelector(target);
       if (el) {
-        // Offset by 100px so the fixed nav doesn't cover the section heading
-        const offset = 100; 
-        const elementPosition = el.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.scrollY - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+        // This natively handles the offset based on globals.css
+        el.scrollIntoView({ behavior: "smooth" });
       }
-    };
-
-    // If on mobile (menu is open), wait 300ms for the menu to close before scrolling
-    if (isMenuOpen) {
-      setTimeout(scrollToTarget, 300);
-    } else {
-      scrollToTarget();
-    }
+    }, 150);
   };
 
   const scrollToTop = () => {
@@ -48,19 +34,15 @@ export default function Nav() {
     openModal();
   };
 
-  // Close the mobile menu when clicking outside the nav
   useEffect(() => {
     if (!open) return;
-
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("touchstart", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
@@ -83,24 +65,13 @@ export default function Nav() {
         </button>
 
         <div className="hidden md:flex items-center gap-10">
-          <button
-            onClick={() => handleScroll("#works")}
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
-          >
+          <button onClick={() => handleScroll("#works")} className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap">
             Services
           </button>
-          <button
-            onClick={() => handleScroll("#about")}
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
-          >
+          <button onClick={() => handleScroll("#about")} className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap">
             About
           </button>
-          <a
-            href={nav.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
-          >
+          <a href={nav.resume} target="_blank" rel="noopener noreferrer" className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap">
             Resume
           </a>
         </div>
@@ -128,18 +99,8 @@ export default function Nav() {
             aria-controls="mobile-menu"
             className="text-[#FAFAFA] p-1 relative w-7 h-7 flex items-center justify-center"
           >
-            <Menu
-              size={20}
-              className={`absolute transition-all duration-300 ease-out ${
-                open ? "opacity-0 rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"
-              }`}
-            />
-            <X
-              size={20}
-              className={`absolute transition-all duration-300 ease-out ${
-                open ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75"
-              }`}
-            />
+            <Menu size={20} className={`absolute transition-all duration-300 ease-out ${open ? "opacity-0 rotate-90 scale-75" : "opacity-100 rotate-0 scale-100"}`} />
+            <X size={20} className={`absolute transition-all duration-300 ease-out ${open ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75"}`} />
           </button>
         </div>
       </div>
@@ -147,37 +108,24 @@ export default function Nav() {
       <div
         id="mobile-menu"
         className={`md:hidden mt-2 rounded-2xl border bg-[#212123]/95 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-out origin-top ${
-          open
-            ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto border-[#2E2E30]"
-            : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none border-transparent"
+          open ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto border-[#2E2E30]" : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none border-transparent"
         }`}
       >
         <div className="p-4 flex flex-col gap-1">
-          <button
-            onClick={() => handleScroll("#works")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out"
-          >
+          <button onClick={() => handleScroll("#works")} className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out">
             Services
           </button>
-          <button
-            onClick={() => handleScroll("#about")}
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out"
-          >
+          <button onClick={() => handleScroll("#about")} className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out">
             About
           </button>
-          <a
-            href={nav.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out"
-          >
+          <a href={nav.resume} target="_blank" rel="noopener noreferrer" className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out">
             Resume
           </a>
           <button
             onClick={handleContactClick}
             className="group inline-flex items-center justify-center gap-2 font-body font-semibold bg-accent text-[#0A0A0A] rounded-full px-4 py-2.5 mt-2 hover:bg-[#FAFAFA] transition-all duration-300 ease-out"
           >
-            <span>Let&apos;s talk</span>
+            <span>Let&apos;s Talk</span>
             <span aria-hidden="true" className="relative w-3.5 h-3.5 shrink-0 overflow-hidden">
               <ArrowRight className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out group-hover:translate-x-4 group-hover:opacity-0" />
               <Mail className="absolute inset-0 w-3.5 h-3.5 transition-all duration-300 ease-out -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100" />
