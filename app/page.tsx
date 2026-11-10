@@ -4,6 +4,7 @@ import Services from "@/components/Services";
 import ToolsMarquee from "@/components/ToolsMarquee";
 import Process from "@/components/Process";
 import About from "@/components/About";
+import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <ToolsMarquee />
       <Process />
       <About />
+      <Testimonials />
       <FinalCTA />
       <Footer />
     </main>
