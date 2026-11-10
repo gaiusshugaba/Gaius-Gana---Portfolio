@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, ArrowRight, Mail } from "lucide-react";
 import { nav } from "@/data/socials";
 import ThemeToggle from "./ThemeToggle";
@@ -8,6 +8,7 @@ import { useContact } from "./ContactProvider";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const { openModal } = useContact();
 
   const handleScroll = (target: string) => {
@@ -26,8 +27,29 @@ export default function Nav() {
     openModal();
   };
 
+  // Close the mobile menu when clicking outside the nav
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      // If the click target is NOT inside the navRef element, close the menu
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [open]);
+
   return (
     <nav
+      ref={navRef}
       aria-label="Primary"
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-[calc(100vw-2rem)] md:w-auto"
     >
