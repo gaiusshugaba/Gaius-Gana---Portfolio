@@ -13,14 +13,10 @@ export default function Nav() {
 
   const handleScroll = (target: string) => {
     setOpen(false);
-    
-    // Short delay to allow the mobile menu to start closing before scrolling
+    // Short delay to let the menu close before scrolling
     setTimeout(() => {
       const el = document.querySelector(target);
-      if (el) {
-        // This natively handles the offset based on globals.css
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }, 150);
   };
 
@@ -55,7 +51,7 @@ export default function Nav() {
       aria-label="Primary"
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-[calc(100vw-2rem)] md:w-auto"
     >
-      <div className="flex items-center justify-between md:justify-start gap-6 rounded-full border border-[#2E2E30] bg-[#212123]/85 backdrop-blur-xl px-6 md:px-10 py-1.5 md:py-2">
+      <div className="flex items-center justify-between md:justify-start gap-6 rounded-full border border-[#2E2E30] bg-[#212123]/85 backdrop-blur-xl px-6 md:px-10 py-1.5 md:py-2 relative z-50">
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
@@ -105,9 +101,14 @@ export default function Nav() {
         </div>
       </div>
 
+      {/* 
+        The Fix: Added `absolute top-full left-0 w-full z-40`. 
+        This takes the menu out of the document flow so it doesn't block clicks 
+        when it's invisible, but still allows it to drop down perfectly from the nav pill.
+      */}
       <div
         id="mobile-menu"
-        className={`md:hidden mt-2 rounded-2xl border bg-[#212123]/95 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-out origin-top ${
+        className={`md:hidden absolute top-full left-0 w-full mt-2 rounded-2xl border bg-[#212123]/95 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-out origin-top z-40 ${
           open ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto border-[#2E2E30]" : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none border-transparent"
         }`}
       >
