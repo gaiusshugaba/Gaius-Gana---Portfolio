@@ -71,11 +71,11 @@ export const projects: Project[] = [
   // --- VIDEO PROJECTS ---
   {
     slug: "ai-video-1",
-    title: "AI Commercial / Ad",
-    summary: "A 15-second AI-generated commercial designed to capture attention and showcase a product.",
+    title: "AI UGC Commercial / Ad",
+    summary: "A 20-second AI-generated commercial designed to capture attention and showcase a product.",
     track: ["video"],
     tags: ["AI Video", "Canva", "Commercial"],
-    thumbnail: "/videos/Ai UGC ad commercial.mp4", 
+    thumbnail: "/videos/Ai%20UGC%20ad%20commercial.mp4", 
     featured: true,
   },
   {
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     summary: "High-velocity short-form video built in Canva using AI-generated visuals.",
     track: ["video"],
     tags: ["AI Video", "Explainer", "Social"],
-    thumbnail: "/videos/Healthcare explainer.mp4",
+    thumbnail: "/videos/Healthcare%20explainer.mp4",
     featured: true,
   },
 
