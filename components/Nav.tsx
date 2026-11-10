@@ -12,9 +12,30 @@ export default function Nav() {
   const { openModal } = useContact();
 
   const handleScroll = (target: string) => {
+    const isMenuOpen = open;
     setOpen(false);
-    const el = document.querySelector(target);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+
+    const scrollToTarget = () => {
+      const el = document.querySelector(target);
+      if (el) {
+        // Offset by 100px so the fixed nav doesn't cover the section heading
+        const offset = 100; 
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    // If on mobile (menu is open), wait 300ms for the menu to close before scrolling
+    if (isMenuOpen) {
+      setTimeout(scrollToTarget, 300);
+    } else {
+      scrollToTarget();
+    }
   };
 
   const scrollToTop = () => {
@@ -32,7 +53,6 @@ export default function Nav() {
     if (!open) return;
 
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      // If the click target is NOT inside the navRef element, close the menu
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setOpen(false);
       }
