@@ -45,7 +45,7 @@ export default function Nav() {
             onClick={() => handleScroll("#works")}
             className="font-body text-[#B0B0B0] text-xs md:text-sm hover:text-[#FAFAFA] transition-colors whitespace-nowrap"
           >
-            Works
+            Services
           </button>
           <button
             onClick={() => handleScroll("#about")}
@@ -115,7 +115,7 @@ export default function Nav() {
             onClick={() => handleScroll("#works")}
             className="font-body text-[#FAFAFA] text-center text-base py-3 px-2 rounded-lg hover:bg-black/50 transition-all duration-300 ease-out"
           >
-            Works
+            Services
           </button>
           <button
             onClick={() => handleScroll("#about")}
