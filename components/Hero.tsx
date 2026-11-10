@@ -35,7 +35,6 @@ export default function Hero() {
         {/* Introduction (Image stacked above Name) */}
         <Reveal delay={0.1}>
           <div className="flex flex-col items-center justify-center mb-6">
-            {/* The image is now smaller (80px on mobile, 100px on desktop) */}
             <div className="relative w-[80px] sm:w-[100px] mb-3">
               <Image
                 src="/hero/portrait.png"
@@ -46,23 +45,23 @@ export default function Hero() {
                 priority
               />
             </div>
-            <h2 className="font-body text-muted text-xl sm:text-2xl font-medium">
+            <h2 className="font-body text-muted text-lg sm:text-xl md:text-2xl font-medium">
               Hi, I'm Gaius Gana.
             </h2>
           </div>
         </Reveal>
 
-        {/* Headline (Single Line, Smaller) */}
+        {/* Headline (Responsive) */}
         <Reveal delay={0.2}>
-          <h1 className="font-display-bold text-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight mb-6 whitespace-nowrap">
+          <h1 className="font-display-bold text-text text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mb-6">
             Design. Automate. Create.
           </h1>
         </Reveal>
 
         {/* Subheadline */}
         <Reveal delay={0.3}>
-          <p className="font-body text-muted text-base sm:text-lg md:text-xl leading-relaxed max-w-3xl">
-            Combining UI/UX Product Design, AI Workflow Automation, and AI-Powered Video. I bridge the gap between how a product looks, how it runs, and how it gets in front of users.
+          <p className="font-body text-muted text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
+            Combining UI/UX Product Design, AI Workflow Automation, and AI-Powered Video. I bridge the gap between how a product looks and feels, how it runs, and how it gets in front of users.
           </p>
         </Reveal>
 
