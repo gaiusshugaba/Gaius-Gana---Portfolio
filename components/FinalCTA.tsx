@@ -51,13 +51,14 @@ export default function FinalCTA() {
     <section className="relative pt-20 sm:pt-24 md:pt-28 pb-10 px-4 sm:px-6 bg-[#19191A]">
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-10 md:gap-16 items-center">
-            <div className="inline-flex flex-col items-stretch w-fit">
-              <h2 className="font-display-bold text-[#FAFAFA] text-5xl sm:text-6xl md:text-7xl mb-4 whitespace-nowrap">
+          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] gap-12 md:gap-16 items-center">
+            
+            {/* Left Column: Perfectly centered block on mobile, left-aligned on desktop */}
+            <div className="flex flex-col items-center md:items-stretch w-full md:w-fit mx-auto md:mx-0">
+              <h2 className="font-display-bold text-[#FAFAFA] text-5xl sm:text-6xl md:text-7xl mb-6 md:mb-4 whitespace-nowrap text-center md:text-left">
                 Lets Talk
               </h2>
 
-              {/* Button now triggers the modal */}
               <button
                 onClick={openModal}
                 {...handlers}
@@ -85,12 +86,13 @@ export default function FinalCTA() {
               </button>
             </div>
 
-            <div className="md:pt-0 text-left md:text-right">
-              <p className="font-body text-[#A3A3A3] text-base sm:text-lg leading-relaxed mb-4">
+            {/* Right Column: Centered on mobile, right-aligned on desktop */}
+            <div className="text-center md:text-right">
+              <p className="font-body text-[#A3A3A3] text-base sm:text-lg leading-relaxed mb-6">
                 {footer.tagline}
               </p>
 
-              <ul className="flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8 md:justify-end list-none p-0 m-0">
+              <ul className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-3 sm:gap-x-8 list-none p-0 m-0">
                 {socials.map((s) => {
                   const Icon = iconMap[s.label];
                   return (
@@ -110,6 +112,7 @@ export default function FinalCTA() {
                 })}
               </ul>
             </div>
+            
           </div>
         </Reveal>
       </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Play } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import type { Project } from "@/lib/types";
 
 export default function ProjectCard({ 
@@ -12,14 +13,20 @@ export default function ProjectCard({
   project: Project; 
   onPlayVideo?: (url: string) => void;
 }) {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-
   const isVideo = project.track.includes("video");
+
+  // Use MotionValues for mouse tracking to prevent React re-renders (performance fix)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 400, damping: 28 });
+  const springY = useSpring(mouseY, { stiffness: 400, damping: 28 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isVideo) {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     }
   };
 
@@ -63,11 +70,8 @@ export default function ProjectCard({
       {/* Media Area */}
       <div className="relative rounded-xl overflow-hidden bg-bg border border-border-subtle/50">
         {isVideo ? (
-          /* 
-            We use aspect-[4/3] to match the height of your standard image thumbnails 
-            so the cards line up perfectly in the layout.
-          */
-          <div className="relative w-full aspect-[4/3]">
+          /* Video preview (cropped to 4:3 so it matches standard card height) */
+          <div className="relative w-full aspect-[4/3] bg-black">
             <video
               src={project.thumbnail}
               preload="metadata"
@@ -75,7 +79,6 @@ export default function ProjectCard({
               playsInline
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             />
-            {/* Play Button Overlay */}
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/10">
               <div className="w-16 h-16 rounded-full bg-accent text-bg flex items-center justify-center shadow-xl transform transition-transform group-hover:scale-110">
                 <Play size={24} fill="currentColor" className="ml-1" />
@@ -83,6 +86,7 @@ export default function ProjectCard({
             </div>
           </div>
         ) : (
+          /* Standard image (reverted to natural height) */
           <img
             src={project.thumbnail}
             alt={`${project.title} thumbnail`}
@@ -113,17 +117,17 @@ export default function ProjectCard({
         </Link>
       )}
 
-      {/* Floating Custom Tooltip (Only for non-video) */}
+      {/* Floating Custom Tooltip */}
       {!isVideo && isHovered && (
-        <div
-          className="fixed pointer-events-none z-50 flex items-center gap-3 bg-accent text-[#0A0A0A] px-5 py-3 sm:px-6 sm:py-4 rounded-full shadow-lg transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-[130%]"
-          style={{ left: mousePos.x, top: mousePos.y }}
+        <motion.div
+          style={{ x: springX, y: springY, top: 0, left: 0 }}
+          className="fixed pointer-events-none z-50 flex items-center gap-3 bg-accent text-[#0A0A0A] px-5 py-3 sm:px-6 sm:py-4 rounded-full shadow-lg -translate-x-1/2 -translate-y-[130%]"
         >
           <span className="font-display-bold-wide text-lg sm:text-xl md:text-2xl uppercase tracking-tight">
             View Case Study
           </span>
           <ArrowUpRight size={24} strokeWidth={3} className="shrink-0" />
-        </div>
+        </motion.div>
       )}
     </>
   );
