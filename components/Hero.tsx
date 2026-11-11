@@ -61,7 +61,7 @@ export default function Hero() {
         {/* Subheadline */}
         <Reveal delay={0.3}>
           <p className="font-body text-muted text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
-            Combining UI/UX Product Design, AI Workflow Automation, and AI-Powered Video. I bridge the gap between how a product looks and feels, how it runs, and how it gets in front of users.
+            Combining UI/UX Product Design, AI Workflow Automation, and AI-Powered Video Creation. I bridge the gap between how a product looks and feels, how it runs, and how it gets in front of users.
           </p>
         </Reveal>
 
