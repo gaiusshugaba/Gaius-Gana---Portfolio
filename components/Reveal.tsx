@@ -45,8 +45,6 @@ export default function Reveal({ children, delay = 0, className }: RevealProps) 
       window.removeEventListener("resize", onScroll);
     };
 
-    // Delay the first check so the hidden state paints first,
-    // then elements in view fade in nicely on load.
     const initialTimeout = setTimeout(check, 60);
 
     window.addEventListener("scroll", onScroll, { passive: true });

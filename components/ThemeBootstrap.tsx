@@ -14,6 +14,7 @@ export default function ThemeBootstrap() {
         root.classList.add("dark");
       }
 
+      // Add this class to enable the reveal animations
       root.classList.add("js-ready");
     } catch {
       document.documentElement.classList.add("js-ready");
