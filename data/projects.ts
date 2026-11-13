@@ -70,21 +70,12 @@ export const projects: Project[] = [
 
   // --- VIDEO PROJECTS ---
   {
-    slug: "plantain-chips-ad",
-    title: "Naija Snacks — AI UGC Commercial",
-    summary: "A highly relatable, localized UGC-style ad capturing the '3 PM office hunger' using hyper-realistic AI visuals and immersive ASMR sound design.",
+    slug: "seamless-activewear-ad",
+    title: "Seamless Activewear — Fitness Campaign",
+    summary: "An aesthetic fitness ad designed to highlight fabric stretch, contour fit, and the 'Gym Baddie' lifestyle without the overhead of traditional studio shoots.",
     track: ["video"],
-    tags: ["AI UGC", "Food & Beverage", "Localized", "Short-Form"],
-    thumbnail: "/videos/plantain-chips-ad.mp4",
-    featured: true,
-  },
-  {
-    slug: "glow-serum-ad",
-    title: "Glow Serum — Beauty & Skincare Ad",
-    summary: "A premium, texture-focused skincare campaign showcasing realistic product application and a flawless 'glass skin' glow using high-end AI generation.",
-    track: ["video"],
-    tags: ["Beauty", "DTC", "Product Commercial", "AI Video"],
-    thumbnail: "/videos/glow-serum-ad.mp4",
+    tags: ["Fitness Apparel", "E-commerce", "AI UGC"],
+    thumbnail: "/videos/seamless-activewear-ad.mp4",
     featured: true,
   },
   {
@@ -97,12 +88,21 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "seamless-activewear-ad",
-    title: "Seamless Activewear — Fitness Campaign",
-    summary: "An aesthetic fitness ad designed to highlight fabric stretch, contour fit, and the 'Gym Baddie' lifestyle without the overhead of traditional studio shoots.",
+    slug: "glow-serum-ad",
+    title: "Glow Serum — Beauty & Skincare Ad",
+    summary: "A premium, texture-focused skincare campaign showcasing realistic product application and a flawless 'glass skin' glow using high-end AI generation.",
     track: ["video"],
-    tags: ["Fitness Apparel", "E-commerce", "AI UGC"],
-    thumbnail: "/videos/seamless-activewear-ad.mp4",
+    tags: ["Beauty", "DTC", "Product Commercial", "AI Video"],
+    thumbnail: "/videos/glow-serum-ad.mp4",
+    featured: true,
+  },
+  {
+    slug: "plantain-chips-ad",
+    title: "Naija Snacks — AI UGC Commercial",
+    summary: "A highly relatable, localized UGC-style ad capturing the '3 PM office hunger' using hyper-realistic AI visuals and immersive ASMR sound design.",
+    track: ["video"],
+    tags: ["AI UGC", "Food & Beverage", "Localized", "Short-Form"],
+    thumbnail: "/videos/plantain-chips-ad.mp4",
     featured: true,
   },
   {
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     summary: "A short-form explainer video designed to break down a complex healthcare service into a simple visual narrative.",
     track: ["video"],
     tags: ["AI Video", "Explainer", "Healthcare"],
-    thumbnail: "/videos/Healthcare%20explainer.mp4", 
+    thumbnail: "/videos/healthcare-explainer.mp4", 
     featured: true,
   },
 ];
