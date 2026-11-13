@@ -11,7 +11,7 @@ export const ledger: CaseStudy = {
     width: 5760,
     height: 4288,
   },
-  liveUrl: "https://ledger-qee6degk1-gaius4.vercel.app/",
+  liveUrl: "https://ledger-ui-zeta.vercel.app/",
   liveUrlLabel: "View live demo",
   timeline: "~4 weeks",
   role: "Solo — UI/UX design and automation build",
